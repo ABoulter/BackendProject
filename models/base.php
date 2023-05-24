@@ -19,4 +19,19 @@ class Base
             ]
         );
     }
+
+    public function sanitizer($data)
+    {
+
+        foreach ($data as $key => $value) {
+
+            if (is_array($value)) {
+                $data[$key] = $this->sanitizer($value);
+            } else {
+                $data[$key] = htmlspecialchars(strip_tags(trim($value)));
+            }
+        }
+
+        return $data;
+    }
 }
