@@ -1,8 +1,5 @@
 .env
 .htaccess
-composer.lock
-vendor/
 *.mp4
 assets/images
-assets/videos
 entities/
