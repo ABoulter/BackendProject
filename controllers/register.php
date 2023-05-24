@@ -1,9 +1,8 @@
 <?php
+
 require_once("models/users.php");
 require_once("helpers/Errors.php");
 require_once("helpers/RememberFields.php");
-
-
 
 if (isset($_POST["submitButton"]) && $_SESSION["csrf_token"] === $_POST["csrf_token"]) {
     foreach ($_POST as $key => $value) {
@@ -20,26 +19,51 @@ if (isset($_POST["submitButton"]) && $_SESSION["csrf_token"] === $_POST["csrf_to
         'confirmPassword' => $_POST['password2']
     ];
 
-    $validData = (
-        mb_strlen($data['firstName']) >= 3 &&
-        mb_strlen($data['firstName']) <= 65 &&
-        mb_strlen($data['lastName']) >= 3 &&
-        mb_strlen($data['lastName']) <= 65 &&
-        mb_strlen($data['username']) >= 3 &&
-        mb_strlen($data['username']) <= 65 &&
-        filter_var($data['email'], FILTER_VALIDATE_EMAIL) &&
-        $data['email'] === $data['confirmEmail'] &&
-        mb_strlen($data['password']) >= 6 &&
-        mb_strlen($data['password']) <= 1000 &&
-        $data['password'] === $data['confirmPassword']);
+    function validateData($data)
+    {
+        $errorArray = array();
 
+        if (strlen($data['firstName']) < 3 || strlen($data['firstName']) > 65) {
+            array_push($errorArray, Errors::$firstNameCharacters);
+        }
+
+        if (strlen($data['lastName']) < 3 || strlen($data['lastName']) > 65) {
+            array_push($errorArray, Errors::$lastNameCharacters);
+        }
+
+        if (strlen($data['username']) < 3 || strlen($data['username']) > 65) {
+            array_push($errorArray, Errors::$usernameCharacters);
+        }
+
+        if ($data['email'] != $data['confirmEmail']) {
+            array_push($errorArray, Errors::$emailsDontMatch);
+        }
+
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            array_push($errorArray, Errors::$invalidEmail);
+        }
+
+        if (strlen($data['password']) < 6 || strlen($data['password']) > 1000) {
+            array_push($errorArray, Errors::$passwordLength);
+        }
+
+        if ($data['password'] != $data['confirmPassword']) {
+            array_push($errorArray, Errors::$passwordsDontMatch);
+        }
+
+        if (!empty($errorArray)) {
+
+            return false;
+        }
+
+        return true;
+    }
+
+    $validData = validateData($data);
 
     if ($validData) {
-
         $users = new Users();
-        $success = $users->register(
-            $data
-        );
+        $success = $users->register($data);
 
         if ($success) {
             $_SESSION["userLoggedIn"] = $data['username'];
