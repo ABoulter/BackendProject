@@ -5,31 +5,37 @@ class Users extends Base
 {
     public function register($data)
     {
-        return $this->insertUserDetails($data);
-    }
 
-    public function login($data)
-    {
-        $query = $this->db->prepare("SELECT username, password FROM users WHERE username = ?");
-        $query->execute([$data['username']]);
+        $query = $this->db->prepare("SELECT id FROM users WHERE email = ? OR username = ?");
+        $query->execute([$data['email'], $data['username']]);
 
-        if ($query->rowCount() == 1) {
-            $row = $query->fetch();
-            $hashedPassword = $row['password'];
-
-            if (password_verify($data['password'], $hashedPassword)) {
-                return true;
-            }
+        if ($query->rowCount() > 0) {
+            return false;
         }
-
-        return false;
-    }
-
-    private function insertUserDetails($data)
-    {
         $password = password_hash($data['password'], PASSWORD_DEFAULT);
 
         $query = $this->db->prepare("INSERT INTO users (firstName, lastName, username, email, password) VALUES (?, ?, ?, ?, ?)");
-        return $query->execute([$data['firstName'], $data['lastName'], $data['username'], $data['email'], $password]);
+        $query->execute([$data['firstName'], $data['lastName'], $data['username'], $data['email'], $password]);
+
+        return $this->db->lastInsertId();
     }
+
+    public function login($username)
+    {
+        $query = $this->db->prepare("
+            SELECT id, email, password
+            FROM users
+            WHERE username = ?
+        ");
+
+        $query->execute([
+            $username
+        ]);
+
+        return $query->fetch();
+    }
+
+
+
+
 }

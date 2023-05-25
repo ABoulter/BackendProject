@@ -10,6 +10,8 @@ $controller = "register";
 $allowed_controllers = [
     "login",
     "register",
+    "home",
+    "streamPage"
 
 
 ];

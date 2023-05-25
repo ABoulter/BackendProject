@@ -1,7 +1,7 @@
 <?php
 
 require_once("models/users.php");
-require_once("helpers/Errors.php");
+
 require_once("helpers/RememberFields.php");
 
 if (isset($_POST["submitButton"]) && $_SESSION["csrf_token"] === $_POST["csrf_token"]) {
@@ -10,22 +10,30 @@ if (isset($_POST["submitButton"]) && $_SESSION["csrf_token"] === $_POST["csrf_to
     }
 
 
-    $credentials = [
-        'username' => $_POST['username'],
-        'password' => $_POST['password']
-    ];
+    if (
+        mb_strlen($_POST["username"]) >= 3 &&
+        mb_strlen($_POST["username"]) <= 60 &&
+        mb_strlen($_POST["password"]) >= 8 &&
+        mb_strlen($_POST["password"]) <= 1000
+    ) {
 
-    require_once("models/Users.php");
-    $users = new Users();
-    $success = $users->login($credentials);
+        $model = new Users();
+        $user = $model->login($_POST["username"]);
 
-    if ($success) {
-        $_SESSION["userLoggedIn"] = $username;
-        header("Location: home");
-        exit();
-    } else {
-        $loginFailedError = Errors::$loginFailed;
+        if (
+            !empty($user) &&
+            password_verify($_POST["password"], $user["password"])
+        ) {
+            $_SESSION["user_id"] = $user["id"];
+            $_SESSION["username"] = $user["username"];
+            header("Location: home");
+            exit();
+        } else {
+            $message = "Login failed";
+        }
     }
+
+
 }
 
 $_SESSION["csrf_token"] = bin2hex(random_bytes(16));

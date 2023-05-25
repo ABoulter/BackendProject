@@ -21,26 +21,23 @@
 
             <form method="POST">
 
-                <?= isset($users) ? $users->getError(Errors::$firstNameCharacters) : ""; ?>
-                <input type="text" name="firstName" placeholder="First Name"
+                <?php
+                if (isset($message)) {
+                    echo '<span class="errorMessage">' . $message . '</span>';
+                }
+                ?>
+                <input type="text" name="firstName" placeholder="First Name" minlength="3" maxlength="60"
                     value="<?php RememberFields::getInputValue("firstName"); ?>" required>
-                <?= isset($users) ? $users->getError(Errors::$lastNameCharacters) : ""; ?>
-                <input type="text" name="lastName" placeholder="Last Name"
+                <input type="text" name="lastName" placeholder="Last Name" minlength="3" maxlength="60"
                     value="<?php RememberFields::getInputValue("lastName"); ?>" required>
-                <?= isset($users) ? $users->getError(Errors::$usernameCharacters) : ""; ?>
-                <?= isset($users) ? $users->getError(Errors::$usernameTaken) : ""; ?>
-                <input type="text" name="username" placeholder="Username"
+                <input type="text" name="username" placeholder="Username" minlength="3" maxlength="60"
                     value="<?php RememberFields::getInputValue("username"); ?>" required>
-                <?= isset($users) ? $users->getError(Errors::$emailsDontMatch) : ""; ?>
-                <?= isset($users) ? $users->getError(Errors::$invalidEmail) : ""; ?>
-                <?= isset($users) ? $users->getError(Errors::$emailTaken) : ""; ?>
                 <input type="email" name="email" placeholder="Email"
                     value="<?php RememberFields::getInputValue("email"); ?>" required>
                 <input type="email" name="email2" placeholder="Confirm email" required>
-                <?= isset($users) ? $users->getError(Errors::$passwordLength) : ""; ?>
-                <?= isset($users) ? $users->getError(Errors::$passwordsDontMatch) : ""; ?>
-                <input type="password" name="password" placeholder="Password" required>
-                <input type="password" name="password2" placeholder="Confirm password" required>
+                <input type="password" name="password" placeholder="Password" minlength="8" maxlength="1000" required>
+                <input type="password" name="password2" placeholder="Confirm password" minlength="8" maxlength="1000"
+                    required>
                 <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
                 <button type="submit" name="submitButton">SUBMIT</button>
 

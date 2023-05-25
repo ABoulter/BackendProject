@@ -20,13 +20,14 @@
             </div>
 
             <form method="POST">
-
-
-                <?= isset($users) ? $users->getError(Errors::$loginFailed) : ""; ?>
+                <?php
+                if (isset($message)) {
+                    echo '<span class="errorMessage">' . $message . '</span>';
+                }
+                ?>
                 <input type="text" name="username" placeholder="Username"
-                    value="<?php RememberFields::getInputValue("username"); ?>" required>
-
-                <input type="password" name="password" placeholder="Password" required>
+                    value="<?php RememberFields::getInputValue("username"); ?>" minlength="3" maxlength="60" required>
+                <input type="password" name="password" placeholder="Password" minlength="8" maxlength="1000" required>
                 <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
                 <button type="submit" name="submitButton">SUBMIT</button>
 
