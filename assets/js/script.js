@@ -13,11 +13,11 @@ function volumeToggle(button) {
   }
 }
 function previewEnded() {
-  const videoElement = document.querySelector(".previewVideo");
-  const imageElement = document.querySelector(".previewImage");
+  const video = document.querySelector(".previewVideo");
+  const image = document.querySelector(".previewImage");
 
-  videoElement.addEventListener("ended", function () {
-    videoElement.classList.toggle("hidden");
-    imageElement.classList.toggle("hidden");
+  video.addEventListener("ended", function () {
+    video.classList.toggle("hidden");
+    image.classList.remove("hidden");
   });
 }
