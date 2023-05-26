@@ -37,6 +37,39 @@
             </div>
         </div>
 
+        <?php foreach ($videos as $seasonNumber => $seasonVideos) { ?>
+            <?php if (!$seasonVideos[0]['isMovie']) { ?>
+                <div class='season'>
+                    <h2>
+                        Season
+                        <?= $seasonNumber ?>
+                    </h2>
+                    <div class='videos'>
+                        <?php foreach ($seasonVideos as $video) { ?>
+
+
+                            <a href=''>
+                                <div class='episodeContainer'>
+                                    <div class='contents'>
+                                        <img src='/<?= $entity['thumbnail'] ?>' alt='<?= $video['title'] ?>'>
+                                        <div class='videoInfo'>
+                                            <h4>
+                                                <?= $video['episode'] . ' ' . $video['title'] ?>
+                                            </h4>
+                                            <span>
+                                                <?= $video['description'] ?>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
+            </div>
+        <?php } ?>
+
+    </div>
 </body>
 
 </html>
