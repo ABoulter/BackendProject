@@ -18,7 +18,7 @@
                 <h3>to continue to Ductape</h3>
             </div>
 
-            <form method="POST" action="/">
+            <form method="POST" action="/register">
                 <?php
                 if (isset($message)) {
                     echo '<span class="errorMessage">' . $message . '</span>';

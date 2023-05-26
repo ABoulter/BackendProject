@@ -228,10 +228,11 @@ h2 {
   object-fit: cover;
 }
 
-.episodeContainer .videoInfo h4,
+.episodeContainer .videoInfo h3,
 .episodeContainer .videoInfo span {
   color: #fff;
   width: 100%;
+  font-size: medium;
   white-space: normal;
 }
 

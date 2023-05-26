@@ -15,7 +15,6 @@
 </head>
 
 <body>
-
     <div class="wrapper">
         <div class='previewContainer'>
             <img src='/<?= $randomEntity['thumbnail'] ?>' class='previewImage' alt='<?= $randomEntity['name'] ?>'
@@ -35,8 +34,6 @@
                 </div>
             </div>
         </div>
-
-
         <div class='previewCategories'>
             <?php foreach ($categories as $category) {
                 $categoryId = $category['id'];
@@ -65,7 +62,6 @@
             } ?>
         </div>
     </div>
-
 </body>
 
 </html>
