@@ -19,8 +19,23 @@
 
 <body>
     <div class="wrapper">
-        <?= $previewVideo ?>
-    </div>
+        <div class='previewContainer'>
+            <img src='/<?= $entity['thumbnail'] ?>' class='previewImage' alt='<?= $entity['name'] ?>' hidden>
+            <video autoplay muted class='previewVideo' onended='previewEnded'>
+                <source src='/<?= $entity['preview'] ?>' type='video/mp4'>
+            </video>
+            <div class='previewOverlay'>
+                <div class='mainDetails'>
+                    <h1>
+                        <?= $entity['name'] ?>
+                    </h1>
+                    <div class='buttons'>
+                        <button><i class='fas fa-play'></i></button>
+                        <button onclick='volumeToggle(this)'><i class='fas fa-volume-off'></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 </body>
 

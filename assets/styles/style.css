@@ -77,7 +77,7 @@ a h3:hover {
   padding: 20px 0;
 }
 
-.column .header h3 {
+.column .header h2 {
   font-size: 24px;
   font-weight: 400;
   line-height: 32px;
@@ -86,7 +86,7 @@ a h3:hover {
   color: #000;
 }
 
-.column .header h4 {
+.column .header h3 {
   font-size: 14px;
   color: rgb(175, 175, 175);
 }
@@ -123,7 +123,7 @@ a h3:hover {
   margin-right: 4px;
   display: inline-flex;
 }
-h3 {
+h2 {
   color: #e5e5e5;
 }
 
@@ -151,12 +151,12 @@ h3 {
   position: absolute;
 }
 
-.previewOverlay .mainDetails h3 {
+.previewOverlay .mainDetails h1 {
   color: #fff;
   font-size: 40px;
   margin: 15px 0;
 }
-.previewOverlay .mainDetails h4 {
+.previewOverlay .mainDetails h2 {
   color: #fff;
   font-size: 20px;
   margin: 15px 0;

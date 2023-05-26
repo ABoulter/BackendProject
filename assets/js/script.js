@@ -18,6 +18,6 @@ function previewEnded() {
 
   video.addEventListener("ended", function () {
     video.classList.toggle("hidden");
-    image.classList.remove("hidden");
+    image.classList.toggle("hidden");
   });
 }

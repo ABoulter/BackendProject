@@ -1,7 +1,6 @@
 <?php
 
 require_once("models/users.php");
-
 require_once("helpers/RememberFields.php");
 
 if (isset($_POST["submitButton"]) && $_SESSION["csrf_token"] === $_POST["csrf_token"]) {

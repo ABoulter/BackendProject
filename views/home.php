@@ -17,15 +17,53 @@
 <body>
 
     <div class="wrapper">
+        <div class='previewContainer'>
+            <img src='/<?= $randomEntity['thumbnail'] ?>' class='previewImage' alt='<?= $randomEntity['name'] ?>'
+                hidden>
+            <video autoplay muted class='previewVideo' onended='previewEnded'>
+                <source src='/<?= $randomEntity['preview'] ?>' type='video/mp4'>
+            </video>
+            <div class='previewOverlay'>
+                <div class='mainDetails'>
+                    <h1>
+                        <?= $randomEntity['name'] ?>
+                    </h1>
+                    <div class='buttons'>
+                        <button><i class='fas fa-play'></i></button>
+                        <button onclick='volumeToggle(this)'><i class='fas fa-volume-off'></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <?=
-            $previewVideo
-            ?>
 
-        <?=
-            $homeContent['html'];
-        ?>
-
+        <div class='previewCategories'>
+            <?php foreach ($categories as $category) {
+                $categoryId = $category['id'];
+                $categoryEntities = $entities[$categoryId];
+                if (!empty($categoryEntities)) {
+                    ?>
+                    <div class='category'>
+                        <h2>
+                            <?= $category['name']; ?>
+                        </h2>
+                        <div class='entities'>
+                            <?php foreach ($categoryEntities as $entity) {
+                                $id = $entity['id'];
+                                $thumbnail = $entity['thumbnail'];
+                                $name = $entity['name'];
+                                ?>
+                                <a href='streamPage/<?= $id ?>'>
+                                    <div class='previewContainer small'>
+                                        <img src='/<?= $thumbnail ?>' title='<?= $name ?>' alt='<?= $name ?>'>
+                                    </div>
+                                </a>
+                            <?php } ?>
+                        </div>
+                    </div>
+                <?php }
+            } ?>
+        </div>
     </div>
 
 </body>

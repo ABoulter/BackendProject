@@ -14,22 +14,24 @@
         <div class="column">
 
             <div class="header">
-                <img src="assets/images/ductape.png" title="logo" alt="ductape">
-                <h3>Sign In</h3>
-                <h4>to continue to Ductape</h4>
+                <h1><img src="assets/images/ductape.png" title="logo" alt="ductape"></h1>
+                <h2>Sign In</h2>
+                <h3>to continue to Ductape</h3>
             </div>
 
-            <form method="POST">
+            <form method="POST" action="/login">
                 <?php
                 if (isset($message)) {
                     echo '<span class="errorMessage">' . $message . '</span>';
                 }
                 ?>
                 <input type="text" name="username" placeholder="Username"
-                    value="<?php RememberFields::getInputValue("username"); ?>" minlength="3" maxlength="60" required>
-                <input type="password" name="password" placeholder="Password" minlength="8" maxlength="1000" required>
+                    value="<?php RememberFields::getInputValue("username"); ?>" minlength="3" maxlength="60"
+                    aria-label="username" required>
+                <input type="password" name="password" placeholder="Password" minlength="8" maxlength="1000"
+                    aria-label="password" required>
                 <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
-                <button type="submit" name="submitButton">SUBMIT</button>
+                <button type="submit" name="submitButton" aria-label="submit button">SUBMIT</button>
 
             </form>
 

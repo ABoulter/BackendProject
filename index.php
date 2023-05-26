@@ -12,8 +12,6 @@ $allowed_controllers = [
     "register",
     "home",
     "streamPage"
-
-
 ];
 
 if (!empty($url_parts[1])) {
@@ -29,7 +27,7 @@ if (!empty($url_parts[2])) {
 
 if (!in_array($controller, $allowed_controllers)) {
     http_response_code(404);
-    die("Não encontrado");
+    die(HttpError::showHttpError("assets/images/404error.png", "Page not Found"));
 }
 
 require("controllers/" . $controller . ".php");
