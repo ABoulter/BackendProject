@@ -10,28 +10,18 @@ if (empty($id) || !is_numeric($id)) {
     http_response_code(404);
     die(HttpError::showHttpError("../assets/images/404error.png", "Page not Found"));
 }
+
 $entitiesModel = new Entities();
 $entity = $entitiesModel->getEntityById($id);
 
-if (!$entity) {
+$videosModel = new Videos();
+$video = $videosModel->getVideoById($id);
+
+if (!$video) {
     http_response_code(404);
     die(HttpError::showHttpError("../assets/images/404error.png", "Page not Found"));
 }
 
-$videosModel = new Videos();
+$videosModel->incrementViews($id);
 
-$seasons = $videosModel->getSeasons($id);
-
-
-
-$videos = [];
-
-foreach ($seasons as $seasonNumber) {
-    $videos[$seasonNumber] = $videosModel->getVideos($entity['id'], $seasonNumber);
-}
-
-
-
-
-
-require("views/streamPage.php");
+require("views/watch.php");

@@ -45,7 +45,7 @@
                     </h2>
                     <div class='videos'>
                         <?php foreach ($seasonVideos as $video) { ?>
-                            <a href=''>
+                            <a href="/watch/<?= $video['id'] ?>">
                                 <div class='episodeContainer'>
                                     <div class='contents'>
                                         <img src='/<?= $entity['thumbnail'] ?>' alt='<?= $video['title'] ?>'>

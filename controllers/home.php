@@ -1,11 +1,8 @@
 <?php
 require_once("models/entities.php");
 require_once("models/categories.php");
+require_once("auth.php");
 
-if (!isset($_SESSION["user_id"])) {
-    header("Location: register");
-    exit();
-}
 
 $entitiesModel = new Entities();
 $categoriesModel = new Categories();
@@ -21,5 +18,5 @@ foreach ($categories as $category) {
 
 $randomEntity = $entitiesModel->getRandomEntity();
 
-require_once("views/home.php");
+require("views/home.php");
 ?>

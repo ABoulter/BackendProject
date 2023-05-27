@@ -34,4 +34,18 @@ class Videos extends Base
     }
 
 
+    public function getVideoById($id)
+    {
+        $query = $this->db->prepare("SELECT * FROM videos WHERE id = ?");
+        $query->execute([$id]);
+        return $query->fetch();
+    }
+
+    public function incrementViews($id)
+    {
+        $query = $this->db->prepare("UPDATE videos SET views=views+1 WHERE id = ?");
+        $query->execute([$id]);
+    }
+
+
 }

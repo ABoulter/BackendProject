@@ -11,7 +11,8 @@ $allowed_controllers = [
     "login",
     "register",
     "home",
-    "streamPage"
+    "streamPage",
+    "watch"
 ];
 
 if (!empty($url_parts[1])) {
