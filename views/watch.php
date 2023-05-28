@@ -10,7 +10,9 @@
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/07c012f958.js" crossorigin="anonymous"></script>
     <script src="../assets/js/script.js"></script>
-
+    <script> document.addEventListener("DOMContentLoaded", () => {
+            initVideo("<?= $video['id']; ?>", "<?= $userId ?>");
+        })</script>
     <title>
         Episode
         <?= " " . $video['episode'] ?> -
@@ -21,9 +23,9 @@
 <body>
     <div class="wrapper">
         <div class="watchContainer">
-
             <div class="videoControls watchNav">
-                <button><i class="fa-solid fa-arrow-left" style="color: #ffffff;"></i></button>
+                <button onclick="goBack()" aria-label="Go back button"><i class="fa-solid fa-arrow-left"
+                        style="color: #ffffff;"></i></button>
                 <h1>
                     <?= " " . $video['title'] ?>
                 </h1>

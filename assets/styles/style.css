@@ -285,6 +285,8 @@ h2 {
 
 .watchNav {
   z-index: 2;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .seen {
