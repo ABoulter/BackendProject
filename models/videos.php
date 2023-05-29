@@ -84,7 +84,7 @@ class Videos extends Base
 
     public function getLastSeenVideo($userId)
     {
-        $query = $this->db->prepare("SELECT videos.id AS videoId, videos.filePath
+        $query = $this->db->prepare("SELECT videos.id AS videoId, videos.filePath, videos.entityId
                                     FROM videos
                                     INNER JOIN videoProgress ON videos.id = videoProgress.videoId
                                     WHERE videoProgress.userId = ?
@@ -94,6 +94,23 @@ class Videos extends Base
         $query->execute([$userId]);
 
         return $query->fetch();
+    }
+
+    public function getFirstEpisodeId($entityId)
+    {
+        $query = $this->db->prepare("SELECT id
+                                FROM videos
+                                WHERE entityId = ?
+                                ORDER BY season, episode
+                                LIMIT 1");
+
+        $query->execute([$entityId]);
+
+        $result = $query->fetch();
+
+        return $result['id'];
+
+
     }
 
 }

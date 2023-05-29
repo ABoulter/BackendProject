@@ -1,8 +1,9 @@
 <?php
 
 require_once("models/entities.php");
+require_once("models/categories.php");
+require_once("models/videoProgress.php");
 require_once("models/videos.php");
-require_once("helpers/httpError.php");
 require_once("auth.php");
 
 
@@ -30,6 +31,11 @@ foreach ($seasons as $seasonNumber) {
     $videos[$seasonNumber] = $videosModel->getVideos($entity['id'], $seasonNumber);
 }
 
+$videoProgressModel = new VideoProgress();
+$lastSeenVideo = $videosModel->getLastSeenVideo($userId);
+$firstEpisodeId = $videosModel->getFirstEpisodeId($entity["id"]);
+$lastSeenVideoId = $lastSeenVideo['videoId'];
+$lastSeenVideoData = $videosModel->getVideoById($lastSeenVideoId);
 
 
 

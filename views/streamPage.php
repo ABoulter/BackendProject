@@ -29,7 +29,13 @@
                         <?= $entity['name'] ?>
                     </h1>
                     <div class='buttons'>
-                        <button><i class='fas fa-play'></i></button>
+                        <?php if ($lastSeenVideo['entityId'] == $id) { ?>
+                            <button onclick="watchVideo(<?= $lastSeenVideo['videoId'] ?>)">
+                                <i class='fas fa-play'></i> Continue Watching
+                            </button>
+                        <?php } else { ?>
+                            <button onclick="watchVideo(<?= $firstEpisodeId ?>)"><i class='fas fa-play'></i> Play</button>
+                        <?php } ?>
                         <button onclick='volumeToggle(this)'><i class='fas fa-volume-off'></i></button>
                     </div>
                 </div>
