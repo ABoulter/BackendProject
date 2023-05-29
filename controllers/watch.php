@@ -24,4 +24,6 @@ if (!$video) {
 
 $videosModel->incrementViews($id);
 
+$upNextVideo = $videosModel->getUpNext($video);
+
 require("views/watch.php");

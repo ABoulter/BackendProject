@@ -56,10 +56,14 @@ function updateProgressTimer(videoId, userId) {
       updateProgress(videoId, userId, event.target.currentTime);
     }, 3000);
   });
+  document.querySelector("video").addEventListener("ended", function () {
+    setFinished(videoId, userId);
+    clearInterval(timer);
+  });
 }
 
 function addDuration(videoId, userId) {
-  fetch("/api/progress", {
+  fetch("/api/videoProgress", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -82,7 +86,7 @@ function addDuration(videoId, userId) {
 }
 
 function updateProgress(videoId, userId, progress) {
-  fetch("/api/progress", {
+  fetch("/api/videoProgress", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -106,4 +110,48 @@ function updateProgress(videoId, userId, progress) {
     .catch((error) => {
       console.error("Error:", error);
     });
+}
+
+function setFinished(videoId, userId) {
+  fetch("/api/videoProgress", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      videoId: videoId,
+      userId: userId,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (
+        data !== null &&
+        data !== "" &&
+        data === "No videoId or userId passed into file"
+      ) {
+        alert(data);
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+function restartVideo() {
+  const videoElement = document.querySelector("video");
+  videoElement.currentTime = 0;
+  videoElement.play();
+  const upNextElement = document.querySelector(".upNext");
+  upNextElement.style.display = "none";
+}
+
+function watchVideo(videoId) {
+  window.location.href = `/watch/${videoId}`;
+}
+
+function showUpNext() {
+  const upNextElement = document.querySelector(".upNext");
+  upNextElement.classList.add("fadeIn");
+  upNextElement.style.display = "block";
 }

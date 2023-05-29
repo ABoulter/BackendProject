@@ -47,5 +47,40 @@ class Videos extends Base
         $query->execute([$id]);
     }
 
+    public function getUpNext($currentVideo)
+    {
+        $query = $this->db->prepare("
+        SELECT id, title, season, episode, filePath
+        FROM videos 
+        WHERE entityId = ? AND id != ?
+            AND (
+                (season = ? AND episode > ?)
+                OR season > ?
+            )
+        ORDER BY season, episode ASC
+        LIMIT 1
+    ");
+
+        $query->execute([
+            $currentVideo["entityId"], $currentVideo["id"],
+            $currentVideo["season"], $currentVideo["episode"], $currentVideo["season"]
+        ]);
+
+        if ($query->rowCount() == 0) {
+            $query = $this->db->prepare("
+            SELECT id, title, season, episode, filePath
+            FROM videos
+            WHERE season <= 1 AND episode <= 1
+                AND id != ?
+            ORDER BY views DESC
+            LIMIT 1
+        ");
+
+            $query->execute([$currentVideo["id"]]);
+        }
+
+        return $query->fetch();
+    }
+
 
 }

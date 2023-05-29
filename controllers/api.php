@@ -3,7 +3,7 @@
 
 header("Content-Type: application/json");
 
-$allowed_options = ["progress"];
+$allowed_options = ["videoProgress"];
 
 if (isset($url_parts[2])) {
     $option = $url_parts[2];
@@ -30,25 +30,40 @@ $model = new $className();
 
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
-    $response = "This is a GET request.";
+
+
+
 } else if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if ($option === "progress") {
+    if ($option === "videoProgress") {
         $body = file_get_contents("php://input");
         $data = json_decode($body, true);
 
         http_response_code(202);
         $model->addVideoProgress($data);
+
+
+
         $response = "Video progress added successfully.";
     } else {
         http_response_code(404);
         $response = "Invalid option";
     }
 } else if ($_SERVER["REQUEST_METHOD"] === "PUT") {
-    if ($option === "progress") {
+    if ($option === "videoProgress") {
         $body = file_get_contents("php://input");
         $data = json_decode($body, true);
 
-        $model->updateVideoProgress($data);
+
+
+        if (!empty($data["progress"])) {
+            $model->updateVideoProgress($data);
+        } elseif (isset($data["videoId"]) && isset($data["userId"])) {
+            $model->updateFinished($data);
+        } else {
+            http_response_code(400);
+            $response = "Invalid data";
+        }
+
         http_response_code(202);
         $response = "Video progress updated successfully.";
     }
@@ -57,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 }
 
 if (empty($response)) {
-    var_dump($response);
+
     http_response_code(404);
     $response = "not Not Found";
 }

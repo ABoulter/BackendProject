@@ -273,7 +273,14 @@ h2 {
   height: 100%;
   justify-content: center;
 }
-
+.upNextContainer {
+  display: flex;
+  margin-top: 15%;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}
 .upNextContainer button {
   padding: 0;
 }
@@ -281,6 +288,19 @@ h2 {
 .upNextContainer h2,
 .upNextContainer h3 {
   color: #fff;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.upNext.fadeIn {
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 .watchNav {

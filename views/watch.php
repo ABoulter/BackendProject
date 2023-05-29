@@ -30,10 +30,36 @@
                     <?= " " . $video['title'] ?>
                 </h1>
             </div>
-            <video controls autoplay>
+            <div class="videoControls upNext" style="display:none;">
+
+                <div class="upNextContainer">
+                    <button onclick="restartVideo();">
+                        <i class="fas fa-redo" style="color: #ffffff;"> </i>
+                    </button>
+                    <h2>Up next:</h2>
+                    <?php if ($upNextVideo) { ?>
+                        <h3>
+                            <?= $upNextVideo['title'] ?>
+                        </h3>
+                        <h3>
+                            <?= "Season " . $upNextVideo['season'] . " - Episode " . $upNextVideo['episode'] ?>
+                        </h3>
+
+                        <button class="playNext" onclick="watchVideo(<?= $upNextVideo['id'] ?>);">
+                            <i class="fas fa-play" style="color: #ffffff;"></i>
+                        </button>
+                    <?php } ?>
+                </div>
+            </div>
+
+            <video controls autoplay onended="showUpNext();">
                 <source src='/<?= $video['filePath'] ?>' type="video/mp4">
             </video>
         </div>
+
+
+
+
     </div>
 </body>
 
