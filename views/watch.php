@@ -33,21 +33,38 @@
             <div class="videoControls upNext" style="display:none;">
 
                 <div class="upNextContainer">
-                    <button onclick="restartVideo();">
+                    <button onclick="restartVideo();" aria-label="Watch again">
                         <i class="fas fa-redo" style="color: #ffffff;"> </i>
                     </button>
-                    <h2>Up next:</h2>
-                    <?php if ($upNextVideo) { ?>
-                        <h3>
-                            <?= $upNextVideo['title'] ?>
-                        </h3>
-                        <h3>
-                            <?= "Season " . $upNextVideo['season'] . " - Episode " . $upNextVideo['episode'] ?>
-                        </h3>
+                    <?php if ($upNextVideo) {
+                        if ($upNextVideo['isMovie'] == 0) {
+                            if ($upNextVideo['entityId'] != $video['entityId']) { ?>
+                                <h2>
+                                    <?= "Watch: " . $upNextVideo['entityName'] ?>
+                                </h2>
+                            <?php }
+                            ?>
+                            <h2>Up next:</h2>
+                            <h3>
+                                <?= $upNextVideo['title'] ?>
+                            </h3>
+                            <h3>
+                                <?= " Season " . $upNextVideo['season'] . " - Episode " . $upNextVideo['episode'] ?>
+                            </h3>
+                            <button class="playNext" onclick="watchVideo(<?= $upNextVideo['id'] ?>);" aria-label="Next episode">
+                                <i class="fas fa-play" style="color: #ffffff;"></i>
+                            </button>
+                        <?php } else { ?>
+                            <h2>Up next:</h2>
+                            <h3>
+                                <?= $upNextVideo['entityName'] . " - The Movie" ?>
+                            </h3>
 
-                        <button class="playNext" onclick="watchVideo(<?= $upNextVideo['id'] ?>);">
-                            <i class="fas fa-play" style="color: #ffffff;"></i>
-                        </button>
+                            <button class="playNext" onclick="watchVideo(<?= $upNextVideo['id'] ?>);"
+                                aria-label="Next series or movie">
+                                <i class="fas fa-play" style="color: #ffffff;"></i>
+                            </button>
+                        <?php } ?>
                     <?php } ?>
                 </div>
             </div>

@@ -286,7 +286,8 @@ h2 {
 }
 
 .upNextContainer h2,
-.upNextContainer h3 {
+.upNextContainer h3,
+.upNextContainer h4 {
   color: #fff;
 }
 

@@ -49,17 +49,17 @@ class Videos extends Base
 
     public function getUpNext($currentVideo)
     {
-        $query = $this->db->prepare("
-        SELECT id, title, season, episode, filePath
-        FROM videos 
-        WHERE entityId = ? AND id != ?
-            AND (
-                (season = ? AND episode > ?)
-                OR season > ?
-            )
-        ORDER BY season, episode ASC
-        LIMIT 1
-    ");
+        $query = $this->db->prepare("SELECT *
+                                    FROM videos 
+                                    WHERE entityId = ? AND id != ?
+                                    AND 
+                                    (
+                                        (season = ? AND episode > ?)
+                                        OR season > ?
+                                    )
+                                    ORDER BY season, episode ASC
+                                    LIMIT 1
+                                   ");
 
         $query->execute([
             $currentVideo["entityId"], $currentVideo["id"],
@@ -67,16 +67,16 @@ class Videos extends Base
         ]);
 
         if ($query->rowCount() == 0) {
-            $query = $this->db->prepare("
-            SELECT id, title, season, episode, filePath
-            FROM videos
-            WHERE season <= 1 AND episode <= 1
-                AND id != ?
-            ORDER BY views DESC
-            LIMIT 1
-        ");
+            $query = $this->db->prepare("SELECT video.*, entity.id, entity.name AS entityName
+                                        FROM videos AS video
+                                        INNER JOIN entities AS entity ON video.entityId = entity.id
+                                        WHERE video.entityId <> ? AND video.season <= 1 and video.episode <= 1 
+                                        ORDER BY RAND()
+                                        LIMIT 1
+                                       ");
 
-            $query->execute([$currentVideo["id"]]);
+            $query->execute([$currentVideo['entityId']]);
+
         }
 
         return $query->fetch();
