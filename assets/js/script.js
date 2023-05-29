@@ -12,15 +12,6 @@ function volumeToggle(button) {
     iconElement.classList.add("fa-volume-up");
   }
 }
-function previewEnded() {
-  const video = document.querySelector(".previewVideo");
-  const image = document.querySelector(".previewImage");
-
-  video.addEventListener("ended", function () {
-    video.classList.toggle("hidden");
-    image.classList.toggle("hidden");
-  });
-}
 
 function goBack() {
   window.history.back();

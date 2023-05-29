@@ -11,11 +11,13 @@ if (empty($id) || !is_numeric($id)) {
     die(HttpError::showHttpError("../assets/images/404error.png", "Page not Found"));
 }
 
-$entitiesModel = new Entities();
-$entity = $entitiesModel->getEntityById($id);
+
 
 $videosModel = new Videos();
 $video = $videosModel->getVideoById($id);
+
+$entitiesModel = new Entities();
+$entity = $entitiesModel->getEntityById($video["entityId"]);
 
 if (!$video) {
     http_response_code(404);

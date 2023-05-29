@@ -56,6 +56,19 @@ class VideoProgress extends Base
 
 
     }
+
+
+    public function isInProgress($userId)
+    {
+        $query = $this->db->prepare("SELECT COUNT(*) FROM videoProgress WHERE userId = ?");
+        $query->execute([$userId]);
+
+        $rowCount = $query->fetchColumn();
+
+        return $rowCount > 0;
+    }
+
+
 /*     public function getStartTime($data)
 {
 if (isset($data["videoId"]) && isset($data["userId"])) {

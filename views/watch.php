@@ -14,9 +14,7 @@
             initVideo("<?= $video['id']; ?>", "<?= $userId ?>");
         })</script>
     <title>
-        Episode
-        <?= " " . $video['episode'] ?> -
-        <?= " " . $video['title'] ?>
+        <?= "Episode " . " " . $video['episode'] . " " . $video['title'] ?>
     </title>
 </head>
 
@@ -26,9 +24,15 @@
             <div class="videoControls watchNav">
                 <button onclick="goBack()" aria-label="Go back button"><i class="fa-solid fa-arrow-left"
                         style="color: #ffffff;"></i></button>
-                <h1>
-                    <?= " " . $video['title'] ?>
-                </h1>
+                <?php if ($video['isMovie']) { ?>
+                    <h1>
+                        <?= $entity['name'] ?>
+                    </h1>
+                <?php } else { ?>
+                    <h1>
+                        <?= $video['title'] ?>
+                    </h1>
+                <?php } ?>
             </div>
             <div class="videoControls upNext" style="display:none;">
 

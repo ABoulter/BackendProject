@@ -82,5 +82,18 @@ class Videos extends Base
         return $query->fetch();
     }
 
+    public function getLastSeenVideo($userId)
+    {
+        $query = $this->db->prepare("SELECT videos.id AS videoId, videos.filePath
+                                    FROM videos
+                                    INNER JOIN videoProgress ON videos.id = videoProgress.videoId
+                                    WHERE videoProgress.userId = ?
+                                    ORDER BY videoProgress.dateModified DESC
+                                    LIMIT 1");
+
+        $query->execute([$userId]);
+
+        return $query->fetch();
+    }
 
 }

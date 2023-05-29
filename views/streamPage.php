@@ -20,8 +20,7 @@
 <body>
     <div class="wrapper">
         <div class='previewContainer'>
-            <img src='/<?= $entity['thumbnail'] ?>' class='previewImage' alt='<?= $entity['name'] ?>' hidden>
-            <video autoplay muted class='previewVideo' onended='previewEnded'>
+            <video autoplay muted class='previewVideo'>
                 <source src='/<?= $entity['preview'] ?>' type='video/mp4'>
             </video>
             <div class='previewOverlay'>

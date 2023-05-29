@@ -16,24 +16,39 @@
 
 <body>
     <div class="wrapper">
-        <div class='previewContainer'>
-            <img src='/<?= $randomEntity['thumbnail'] ?>' class='previewImage' alt='<?= $randomEntity['name'] ?>'
-                hidden>
-            <video autoplay muted class='previewVideo' onended='previewEnded'>
-                <source src='/<?= $randomEntity['preview'] ?>' type='video/mp4'>
-            </video>
-            <div class='previewOverlay'>
-                <div class='mainDetails'>
-                    <h1>
-                        <?= $randomEntity['name'] ?>
-                    </h1>
-                    <div class='buttons'>
-                        <button><i class='fas fa-play'></i></button>
-                        <button onclick='volumeToggle(this)'><i class='fas fa-volume-off'></i></button>
+        <?php if ($video) { ?>
+            <div class="previewContainer">
+                <video autoplay muted class="previewVideo">
+                    <source src="/<?= $video['filePath']; ?>" type="video/mp4">
+                </video>
+                <div class="previewOverlay">
+                    <div class="mainDetails">
+                        <h1>
+                            <?= $entity["name"] ?>
+                        </h1>
+
+                        <?php if (!$video['isMovie']) { ?>
+
+                            <h2>
+                                <?= $video['title']; ?>
+                            </h2>
+                            <h3>
+                                <?= "Season " . $video['season'] . " - Episode " . $video["episode"]; ?>
+                            </h3>
+                        <?php } ?>
+                        <div class="buttons">
+                            <button onclick="watchVideo(<?= $video['id']; ?>)">
+                                <i class="fa-solid fa-play"></i>
+                                <?= $userInProgress ? "Continue watching" : "Play"; ?>
+                            </button>
+                            <button onclick="volumeToggle(this)">
+                                <i class="fa-solid fa-volume-off"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        <?php } ?>
         <div class='previewCategories'>
             <?php foreach ($categories as $category) {
                 $categoryId = $category['id'];
