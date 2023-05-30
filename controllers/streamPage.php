@@ -49,6 +49,4 @@ $lastSeenVideoId = $lastSeenVideo['videoId'];
 $lastSeenVideoData = $videosModel->getVideoById($lastSeenVideoId);
 
 
-
-
 require("views/streamPage.php");

@@ -32,5 +32,7 @@ if ($userInProgress) {
 $video = $videoModel->getVideoById($videoId);
 $entity = $entitiesModel->getEntityById($video["entityId"]);
 
+
 require("views/home.php");
+
 ?>

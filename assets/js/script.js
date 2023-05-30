@@ -1,3 +1,15 @@
+window.addEventListener("DOMContentLoaded", () => {
+  const topBar = document.querySelector(".topBar");
+
+  function toggleScrolled() {
+    topBar.classList.toggle("scrolled", window.scrollY > topBar.offsetHeight);
+  }
+
+  toggleScrolled();
+
+  window.addEventListener("scroll", toggleScrolled);
+});
+
 function volumeToggle(button) {
   const video = document.querySelector(".previewVideo");
   video.muted = !video.muted;

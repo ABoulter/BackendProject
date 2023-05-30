@@ -13,7 +13,7 @@ $allowed_controllers = [
     "home",
     "streamPage",
     "watch",
-    "api"
+    "api",
 ];
 
 if (!empty($url_parts[1])) {

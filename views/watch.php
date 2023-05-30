@@ -24,15 +24,9 @@
             <div class="videoControls watchNav">
                 <button onclick="goBack()" aria-label="Go back button"><i class="fa-solid fa-arrow-left"
                         style="color: #ffffff;"></i></button>
-                <?php if ($video['isMovie']) { ?>
-                    <h1>
-                        <?= $entity['name'] ?>
-                    </h1>
-                <?php } else { ?>
-                    <h1>
-                        <?= $video['title'] ?>
-                    </h1>
-                <?php } ?>
+                <h1>
+                    <?= " " . $video['title'] ?>
+                </h1>
             </div>
             <div class="videoControls upNext" style="display:none;">
 

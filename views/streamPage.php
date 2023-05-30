@@ -16,6 +16,7 @@
     </title>
 
 </head>
+<?php include("views/templates/navbar.php") ?>
 
 <body>
     <div class="wrapper">
