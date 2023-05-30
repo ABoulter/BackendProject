@@ -68,6 +68,16 @@ class VideoProgress extends Base
         return $rowCount > 0;
     }
 
+    public function hasSeen($userId)
+    {
+        $query = $this->db->prepare("SELECT videoId FROM videoProgress WHERE userId = ? AND isFinished = 1");
+        $query->execute([$userId]);
+
+        $result = $query->fetchAll(PDO::FETCH_COLUMN);
+        return $result;
+    }
+
+
 
 /*     public function getStartTime($data)
 {

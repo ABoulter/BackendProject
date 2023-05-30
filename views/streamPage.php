@@ -62,6 +62,10 @@
                                                 <?= $video['description'] ?>
                                             </span>
                                         </div>
+                                        <?php if (in_array($video['id'], $hasSeen)) { ?>
+                                            <i class='fa-solid fa-circle-check seen'></i>
+                                        <?php } ?>
+
                                     </div>
                                 </div>
                             </a>

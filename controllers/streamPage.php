@@ -25,13 +25,24 @@ $seasons = $videosModel->getSeasons($id);
 
 
 
+
+
 $videos = [];
+$videoProgressModel = new VideoProgress();
+$hasSeen = $videoProgressModel->hasSeen($userId);
 
 foreach ($seasons as $seasonNumber) {
     $videos[$seasonNumber] = $videosModel->getVideos($entity['id'], $seasonNumber);
+    foreach ($videos[$seasonNumber] as $video) {
+        if (isset($hasSeen[$video['id']])) {
+            $video['hasSeen'] = true;
+        } else {
+            $video['hasSeen'] = false;
+        }
+    }
+
 }
 
-$videoProgressModel = new VideoProgress();
 $lastSeenVideo = $videosModel->getLastSeenVideo($userId);
 $firstEpisodeId = $videosModel->getFirstEpisodeId($entity["id"]);
 $lastSeenVideoId = $lastSeenVideo['videoId'];
