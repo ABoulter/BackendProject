@@ -26,4 +26,5 @@
             <i class="fa-solid fa-right-from-bracket"></i>
         </a>
     </div>
+
 </nav>

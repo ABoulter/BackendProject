@@ -3,7 +3,7 @@
 
 header("Content-Type: application/json");
 
-$allowed_options = ["videoProgress"];
+$allowed_options = ["videoProgress", "entities"];
 
 if (isset($url_parts[2])) {
     $option = $url_parts[2];
@@ -33,6 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
 
 
+
 } else if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($option === "videoProgress") {
         $body = file_get_contents("php://input");
@@ -48,6 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         http_response_code(404);
         $response = "Invalid option";
     }
+
 } else if ($_SERVER["REQUEST_METHOD"] === "PUT") {
     if ($option === "videoProgress") {
         $body = file_get_contents("php://input");

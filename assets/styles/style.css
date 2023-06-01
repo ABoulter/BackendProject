@@ -398,7 +398,7 @@ h2 {
   margin-right: auto;
 }
 
-.settingsContainer h2 {
+.settingsContainer h1 {
   color: #fff;
 }
 
@@ -441,7 +441,7 @@ h2 {
   color: #2ecc71;
 }
 
-.formSection h3 {
+.formSection h2 {
   padding: 0;
   color: #fff;
   font-size: 20px;

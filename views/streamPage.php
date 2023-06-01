@@ -16,9 +16,10 @@
     </title>
 
 </head>
-<?php include("views/templates/navbar.php") ?>
+
 
 <body>
+    <?php include("views/templates/navbar.php") ?>
     <div class="wrapper">
         <div class='previewContainer'>
             <video autoplay muted class='previewVideo'>

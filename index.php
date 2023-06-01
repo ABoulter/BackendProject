@@ -15,7 +15,9 @@ $allowed_controllers = [
     "watch",
     "api",
     "movies",
-    "tvShows"
+    "tvShows",
+    "search",
+    "profile"
 ];
 
 if (!empty($url_parts[1])) {

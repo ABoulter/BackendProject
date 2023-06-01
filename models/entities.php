@@ -65,4 +65,5 @@ class Entities extends Base
         return $query->fetch();
     }
 
+
 }

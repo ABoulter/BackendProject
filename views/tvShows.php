@@ -13,9 +13,10 @@
     <title>TV Shows</title>
 
 </head>
-<?php include("views/templates/navbar.php") ?>
+
 
 <body>
+    <?php include("views/templates/navbar.php") ?>
     <div class="wrapper">
         <?php if ($video) { ?>
             <div class="previewContainer">

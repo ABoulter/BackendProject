@@ -35,6 +35,43 @@ class Users extends Base
         return $query->fetch();
     }
 
+    public function getUser($userId)
+    {
+
+        $query = $this->db->prepare("SELECT * FROM users WHERE id= ?");
+
+        $query->execute([$userId]);
+
+        return $query->fetch();
+    }
+    function updateUserDetails($userId, $data)
+    {
+        $query = $this->db->prepare("UPDATE users SET firstName = ?, lastName = ?, email = ? WHERE id = ?");
+
+        $firstName = $data['firstName'];
+        $lastName = $data['lastName'];
+        $email = $data['email'];
+
+        $query->execute([$firstName, $lastName, $email, $userId]);
+
+
+        if ($query->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function updatePassword($userId, $newPassword)
+    {
+        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
+        $query = $this->db->prepare("UPDATE users SET password = ? WHERE id = ?");
+        $query->execute([$hashedPassword, $userId]);
+
+        return $query->rowCount() > 0;
+    }
 
 
 
