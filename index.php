@@ -17,7 +17,8 @@ $allowed_controllers = [
     "movies",
     "tvShows",
     "search",
-    "profile"
+    "profile",
+    "logout"
 ];
 
 if (!empty($url_parts[1])) {
