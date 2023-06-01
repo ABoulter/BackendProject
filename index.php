@@ -18,11 +18,13 @@ $allowed_controllers = [
     "tvShows",
     "search",
     "profile",
-    "logout"
+    "logout",
+    "billing"
 ];
 
 if (!empty($url_parts[1])) {
-    $controller = $url_parts[1];
+    $controllerParts = explode("?", $url_parts[1]);
+    $controller = $controllerParts[0];
 }
 
 

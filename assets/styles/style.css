@@ -441,7 +441,8 @@ h2 {
   color: #2ecc71;
 }
 
-.formSection h2 {
+.formSection h2,
+h3 {
   padding: 0;
   color: #fff;
   font-size: 20px;

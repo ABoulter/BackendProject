@@ -73,6 +73,17 @@ class Users extends Base
         return $query->rowCount() > 0;
     }
 
+    public function setIsSubscribed($value, $userId)
+    {
+        $query = $this->db->prepare("UPDATE users SET isSubscribed = ?
+                                WHERE id = ?");
+
+        if ($query->execute([$value, $userId])) {
+            return true;
+        }
+
+        return false;
+    }
 
 
 }
