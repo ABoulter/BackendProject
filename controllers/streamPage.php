@@ -44,9 +44,14 @@ foreach ($seasons as $seasonNumber) {
 }
 
 $lastSeenVideo = $videosModel->getLastSeenVideo($userId);
-$firstEpisodeId = $videosModel->getFirstEpisodeId($entity["id"]);
-$lastSeenVideoId = $lastSeenVideo['videoId'];
-$lastSeenVideoData = $videosModel->getVideoById($lastSeenVideoId);
+
+if ($lastSeenVideo) {
+    $lastSeenVideoData = $videosModel->getVideoById($lastSeenVideo['videoId']);
+} else {
+    $firstEpisodeId = $videosModel->getFirstEpisodeId($entity["id"]);
+}
+
+
 
 
 require("views/streamPage.php");

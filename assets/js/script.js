@@ -1,13 +1,15 @@
 window.addEventListener("DOMContentLoaded", () => {
-  const topBar = document.querySelector(".topBar");
+  if (!window.location.pathname.includes("/watch/")) {
+    const topBar = document.querySelector(".topBar");
 
-  function toggleScrolled() {
-    topBar.classList.toggle("scrolled", window.scrollY > topBar.offsetHeight);
+    function toggleScrolled() {
+      topBar.classList.toggle("scrolled", window.scrollY > topBar.offsetHeight);
+    }
+
+    toggleScrolled();
+
+    window.addEventListener("scroll", toggleScrolled);
   }
-
-  toggleScrolled();
-
-  window.addEventListener("scroll", toggleScrolled);
 });
 
 function volumeToggle(button) {

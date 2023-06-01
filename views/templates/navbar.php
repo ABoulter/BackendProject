@@ -9,10 +9,10 @@
             <a href="/">Home</a>
         </li>
         <li>
-            <a href="/">TV Shows</a>
+            <a href="/tvShows">TV Shows</a>
         </li>
         <li>
-            <a href="/">Movies</a>
+            <a href="/movies">Movies</a>
         </li>
     </ul>
     <div class="rightItems">

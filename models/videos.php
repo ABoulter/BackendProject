@@ -84,7 +84,7 @@ class Videos extends Base
 
     public function getLastSeenVideo($userId)
     {
-        $query = $this->db->prepare("SELECT videos.id AS videoId, videos.filePath, videos.entityId
+        $query = $this->db->prepare("SELECT videos.id AS videoId, videos.filePath, videos.entityId, videos.isMovie, videos.season, videos.episode, videos.title
                                     FROM videos
                                     INNER JOIN videoProgress ON videos.id = videoProgress.videoId
                                     WHERE videoProgress.userId = ?
@@ -98,7 +98,7 @@ class Videos extends Base
 
     public function getFirstEpisodeId($entityId)
     {
-        $query = $this->db->prepare("SELECT id
+        $query = $this->db->prepare("SELECT *
                                 FROM videos
                                 WHERE entityId = ?
                                 ORDER BY season, episode
@@ -108,9 +108,35 @@ class Videos extends Base
 
         $result = $query->fetch();
 
-        return $result['id'];
+        return $result;
 
 
     }
+
+    public function getRandomMovieId()
+    {
+        $query = $this->db->prepare("SELECT videos.*, entities.id AS entityId
+                                 FROM videos
+                                 JOIN entities ON videos.entityId = entities.id
+                                 LEFT JOIN videoProgress ON videos.id = videoProgress.videoId
+                                 WHERE entities.isMovie = 1 AND videoProgress.id IS NULL
+                                 ORDER BY RAND()
+                                 LIMIT 1");
+        $query->execute();
+        return $query->fetch();
+    }
+
+    public function getRandomVideoId()
+    {
+        $query = $this->db->prepare("SELECT *
+                                 FROM videos
+                                 WHERE (episode = 1 AND season = 1) OR (episode = 0 AND season= 0)
+                                 ORDER BY RAND()
+                                 LIMIT 1");
+        $query->execute();
+        return $query->fetch();
+    }
+
+
 
 }

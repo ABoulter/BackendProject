@@ -15,7 +15,7 @@ $categories = $categoriesModel->getCategories();
 $entities = array();
 foreach ($categories as $category) {
     $categoryId = $category['id'];
-    $categoryEntities = $entitiesModel->getEntities($categoryId);
+    $categoryEntities = $entitiesModel->getTVShowsByCategory($categoryId);
     $entities[$categoryId] = $categoryEntities;
 }
 
@@ -25,14 +25,15 @@ if ($userInProgress) {
     $lastSeenVideo = $videoModel->getLastSeenVideo($userId);
     $videoId = $lastSeenVideo['videoId'];
 } else {
-    $randomEntity = $videoModel->getRandomVideoId();
-    $videoId = $randomEntity["id"];
+
+    $randomEntity = $entitiesModel->getRandomTVShowId();
+    $videoId = $randomEntity["videoId"];
 }
 
 $video = $videoModel->getVideoById($videoId);
 $entity = $entitiesModel->getEntityById($video["entityId"]);
 
 
-require("views/home.php");
+require("views/tvShows.php");
 
 ?>

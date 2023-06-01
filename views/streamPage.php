@@ -22,15 +22,41 @@
     <div class="wrapper">
         <div class='previewContainer'>
             <video autoplay muted class='previewVideo'>
-                <source src='/<?= $entity['preview'] ?>' type='video/mp4'>
+                <?php if ($lastSeenVideo) { ?>
+                    <source src='/<?= $lastSeenVideo['filePath'] ?>' type='video/mp4'>
+                <?php } else { ?>
+                    <source src='/<?= $firstEpisodeId['filePath'] ?>' type='video/mp4'>
+                <?php } ?>
+
             </video>
-            <div class='previewOverlay'>
-                <div class='mainDetails'>
+            <div class="previewOverlay">
+                <div class="mainDetails">
                     <h1>
-                        <?= $entity['name'] ?>
+                        <?= $entity["name"] ?>
                     </h1>
+
+                    <?php if (!$video['isMovie']) { ?>
+
+                        <?php if ($lastSeenVideo) { ?>
+
+                            <h2>
+                                <?= $lastSeenVideo['title']; ?>
+                            </h2>
+                            <h3>
+                                <?= "Season " . $lastSeenVideo['season'] . " - Episode " . $lastSeenVideo["episode"]; ?>
+                            </h3>
+                        <?php } else { ?>
+                            <h2>
+                                <?= $firstEpisodeId['title']; ?>
+                            </h2>
+                            <h3>
+                                <?= "Season " . $firstEpisodeId['season'] . " - Episode " . $firstEpisodeId["episode"]; ?>
+                            </h3>
+
+                        <?php } ?>
+                    <?php } ?>
                     <div class='buttons'>
-                        <?php if ($lastSeenVideo['entityId'] == $id) { ?>
+                        <?php if ($lastSeenVideo) { ?>
                             <button onclick="watchVideo(<?= $lastSeenVideo['videoId'] ?>)">
                                 <i class='fas fa-play'></i> Continue Watching
                             </button>

@@ -14,6 +14,8 @@ $allowed_controllers = [
     "streamPage",
     "watch",
     "api",
+    "movies",
+    "tvShows"
 ];
 
 if (!empty($url_parts[1])) {
