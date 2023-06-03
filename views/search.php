@@ -13,39 +13,74 @@
     <?php include("views/templates/navbar.php") ?>
     <div class="wrapper">
         <form method="POST" action="/search" class="textboxContainer">
-            <input type="text" class="searchInput" placeholder="Search for something to watch"
+            <input type="text" name="input" class="searchInput" placeholder="Search for something to watch"
                 aria-label="Search for something to Watch">
         </form>
 
         <div class="results">
-            <div class="previewCategories noScroll">
-                <div class="category">
-                    <div class="entities">
-                        <?php
-                        if (!empty($searchResults)) {
-                            foreach ($searchResults as $result) {
-                                $id = $result['id'];
-                                $thumbnail = $result['thumbnail'];
-                                $name = $result['name'];
-                                ?>
-                                <a href='streamPage/<?= $id ?>'>
-                                    <div class='previewContainer small'>
-                                        <img src='/<?= $thumbnail ?>' title='<?= $name ?>' alt='<?= $name ?>'>
-                                    </div>
-                                </a>
-                                <?php
-                            }
-                        } else {
-                            ?>
-                            <div class="noResultsElement">No results found.</div>
-                            <?php
-                        }
-                        ?>
-                    </div>
-                </div>
+            <div class="entities">
+
             </div>
         </div>
-    </div>
+
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+
+                let timer;
+
+                document.querySelector(".searchInput").addEventListener("keyup", function () {
+                    clearTimeout(timer);
+
+                    timer = setTimeout(function () {
+                        let val = document.querySelector(".searchInput").value;
+                        if (val !== "") {
+                            const query = { input: val };
+
+                            fetch("/search", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify(query)
+                            })
+                                .then(response => response.json())
+                                .then(function (results) {
+                                    const entitiesContainer = document.querySelector(".entities");
+                                    entitiesContainer.innerHTML = "";
+
+                                    if (Array.isArray(results) && results.length > 0) {
+                                        results.forEach(function (result) {
+                                            const entityLink = document.createElement("a");
+                                            entityLink.href = 'streamPage/' + result.id;
+
+                                            const previewContainer = document.createElement("div");
+                                            previewContainer.classList.add("previewContainer", "small");
+
+                                            const thumbnail = document.createElement("img");
+                                            thumbnail.src = result.thumbnail;
+                                            thumbnail.title = result.name;
+                                            thumbnail.alt = result.name;
+
+                                            previewContainer.appendChild(thumbnail);
+                                            entityLink.appendChild(previewContainer);
+                                            entitiesContainer.appendChild(entityLink);
+                                        });
+                                    } else {
+                                        entitiesContainer.innerHTML = "No results found";
+                                    }
+                                })
+                                .catch(function (error) {
+                                    console.error(error);
+                                });
+                        } else {
+                            document.querySelector(".results").innerHTML = "";
+                        }
+                    }, 500);
+                });
+            });
+
+        </script>
 </body>
 
 </html>

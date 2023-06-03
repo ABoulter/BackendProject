@@ -65,5 +65,12 @@ class Entities extends Base
         return $query->fetch();
     }
 
+    public function searchEntities($searchTerm)
+    {
+        $query = $this->db->prepare("SELECT * FROM entities WHERE name LIKE CONCAT('%', ?, '%')");
+        $query->execute([$searchTerm]);
 
+        $results = $query->fetchAll();
+        return $results;
+    }
 }

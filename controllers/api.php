@@ -3,7 +3,7 @@
 
 header("Content-Type: application/json");
 
-$allowed_options = ["videoProgress", "entities"];
+$allowed_options = ["videoProgress"];
 
 if (isset($url_parts[2])) {
     $option = $url_parts[2];
