@@ -38,7 +38,7 @@
 
                     <?php if (!$video['isMovie']) { ?>
 
-                        <?php if ($lastSeenVideo) { ?>
+                        <?php if ($lastSeenVideo && $lastSeenVideo["entityId"] == $id) { ?>
 
                             <h2>
                                 <?= $lastSeenVideo['title']; ?>
