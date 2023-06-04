@@ -2,16 +2,26 @@
     <div class="navigation">
         <ul>
             <li>
-                <a href="#">
+                <a href="/adminDashboard">
                     <span class="icon">
-                        <img src="assets/images/icon.png" alt="icon of ductape">
+                        <img src="/assets/images/icon.png" alt="icon of ductape">
                     </span>
-                    <span class="title">Ductape Dashboard</span>
+                    <h1 class="title">Ductape Dashboard</h1>
+                </a>
+            </li>
+
+
+            <li>
+                <a href="/adminDashboard">
+                    <span class="icon">
+                        <ion-icon name="home-outline"></ion-icon>
+                    </span>
+                    <span class="title">Dashboard</span>
                 </a>
             </li>
 
             <li>
-                <a href="#">
+                <a href="/adminAdd">
                     <span class="icon">
                         <ion-icon name="add-circle-outline"></ion-icon>
                     </span>
@@ -19,28 +29,11 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="/adminEdit">
                     <span class="icon">
                         <ion-icon name="settings-outline"></ion-icon>
                     </span>
                     <span class="title">Edit Video</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="icon">
-                        <ion-icon name="close-circle-outline"></ion-icon>
-                    </span>
-                    <span class="title">Remove Video</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="#">
-                    <span class="icon">
-                        <ion-icon name="lock-closed-outline"></ion-icon>
-                    </span>
-                    <span class="title">Password</span>
                 </a>
             </li>
             <li>

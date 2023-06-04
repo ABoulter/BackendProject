@@ -5,6 +5,18 @@ require_once("base.php");
 class Videos extends Base
 {
 
+    public function get($page, $perPage)
+    {
+        $offset = ($page - 1) * $perPage;
+
+        $query = $this->db->prepare("SELECT * FROM videos ORDER BY releaseDate DESC LIMIT ?, ?");
+        $query->bindParam(1, $offset, PDO::PARAM_INT);
+        $query->bindParam(2, $perPage, PDO::PARAM_INT);
+        $query->execute();
+
+        return $query->fetchAll();
+    }
+
     public function getVideos($entityId, $season = null)
     {
         $query = "SELECT * FROM videos WHERE entityId = ?";
@@ -148,6 +160,30 @@ class Videos extends Base
         return $totalViews;
     }
 
+    public function updateVideo($videoId, $videoData)
+    {
+        $query = $this->db->prepare("UPDATE videos SET title = ?, description = ?, filepath = ?, season = ?, episode = ?, releaseDate = ? WHERE id = ?");
+
+        $title = $videoData['title'];
+        $description = $videoData['description'];
+        $filepath = $videoData['filepath'];
+        $season = $videoData['season'];
+        $episode = $videoData['episode'];
+        $releaseDate = $videoData['releaseDate'];
+
+        $query->execute([$title, $description, $filepath, $season, $episode, $releaseDate, $videoId]);
+    }
+
+
+
+    public function getTotalVideosCount()
+    {
+        $query = $this->db->prepare("SELECT COUNT(*) as total FROM videos");
+        $query->execute();
+
+        $result = $query->fetch();
+        return $result['total'];
+    }
 
 
 }

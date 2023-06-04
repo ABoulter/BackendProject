@@ -10,6 +10,7 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://kit.fontawesome.com/07c012f958.js"></script>
     <link rel="stylesheet" href="assets/styles/dashboard.css">
+
 </head>
 
 <body>
@@ -39,10 +40,6 @@
             </div>
         </div>
     </div>
-
-    <script src="assets/js/main.js"></script>
-
-
 </body>
 
 </html>

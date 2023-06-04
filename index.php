@@ -20,7 +20,9 @@ $allowed_controllers = [
     "profile",
     "logout",
     "billing",
-    "adminDashboard"
+    "adminDashboard",
+    "adminEdit",
+    "adminEditVideo"
 ];
 
 if (!empty($url_parts[1])) {
