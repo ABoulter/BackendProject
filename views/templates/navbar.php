@@ -22,6 +22,11 @@
         <a href="/profile">
             <i class="fa-solid fa-user"></i>
         </a>
+        <?php if ($admin) { ?>
+            <a href="/adminDashboard">
+                <i class="fa-solid fa-hammer"></i>
+            </a>
+        <?php } ?>
         <a href="/logout">
             <i class="fa-solid fa-right-from-bracket"></i>
         </a>

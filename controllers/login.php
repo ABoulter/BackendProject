@@ -25,6 +25,7 @@ if (isset($_POST["submitButton"]) && $_SESSION["csrf_token"] === $_POST["csrf_to
         ) {
             $_SESSION["user_id"] = $user["id"];
             $_SESSION["username"] = $user["username"];
+            $_SESSION["admin"] = $user["isAdmin"];
             header("Location: home");
             exit();
         } else {

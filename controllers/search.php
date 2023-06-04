@@ -1,5 +1,6 @@
 <?php
 require_once("models/entities.php");
+require_once("auth.php");
 $entitiesModel = new Entities();
 
 

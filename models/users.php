@@ -23,7 +23,7 @@ class Users extends Base
     public function login($username)
     {
         $query = $this->db->prepare("
-            SELECT id, username, email, password
+            SELECT id, username, email, password, isAdmin
             FROM users
             WHERE username = ?
         ");
@@ -34,6 +34,7 @@ class Users extends Base
 
         return $query->fetch();
     }
+
 
     public function getUser($userId)
     {

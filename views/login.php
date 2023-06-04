@@ -35,7 +35,7 @@
 
             </form>
 
-            <a href="/" class="signInMessage">Need an account? Sign up here!</a>
+            <a href="/register" class="signInMessage">Need an account? Sign up here!</a>
 
         </div>
     </div>

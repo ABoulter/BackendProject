@@ -57,7 +57,7 @@
                         <?php } ?>
                     <?php } ?>
                     <div class='buttons'>
-                        <?php if ($lastSeenVideo) { ?>
+                        <?php if ($lastSeenVideo && $lastSeenVideo["entityId"] == $id) { ?>
                             <button onclick="watchVideo(<?= $lastSeenVideo['videoId'] ?>)">
                                 <i class='fas fa-play'></i> Continue Watching
                             </button>

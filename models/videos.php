@@ -137,6 +137,17 @@ class Videos extends Base
         return $query->fetch();
     }
 
+    public function getTotalViews()
+    {
+        $query = $this->db->prepare("SELECT SUM(views) AS totalViews FROM videos");
+        $query->execute();
+
+        $result = $query->fetch();
+        $totalViews = $result['totalViews'];
+
+        return $totalViews;
+    }
+
 
 
 }

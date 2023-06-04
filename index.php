@@ -19,7 +19,8 @@ $allowed_controllers = [
     "search",
     "profile",
     "logout",
-    "billing"
+    "billing",
+    "adminDashboard"
 ];
 
 if (!empty($url_parts[1])) {
