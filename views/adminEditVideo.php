@@ -16,37 +16,46 @@
 <body>
     <?php include("views/templates/dashboardMenu.php") ?>
     <div class="main">
-        <h1 class="formHeader">
-            <?= "Edit: " . $video['title'] ?>
-        </h1>
-        <form class="editForm" method="POST" action="/adminEditVideo/<?= $id; ?>" enctype="multipart/form-data">
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title" value="<?= $video['title']; ?>">
+        <?php if (isset($successMessage) && $successMessage === "Video successfully deleted") { ?>
+            <div class="deletedContainer">
+                <h1 class="deletedVideo">Video removed</h1>
+                <a href="/adminEdit">Return to Video list</a>
+            </div>
 
-            <label for="description">Description:</label>
-            <textarea id="description" name="description"><?= $video['description']; ?></textarea>
+        <?php } else { ?>
+            <h1 class="formHeader">
+                <?= "Edit: " . $video['title'] ?>
+            </h1>
+            <form class="editForm" method="POST" action="/adminEditVideo/<?= $id; ?>" enctype="multipart/form-data">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" value="<?= $video['title']; ?>">
 
-            <label for="filepath">File Path:</label>
-            <input type="text" id="filepath" name="filepath" value="<?= $video['filePath']; ?>">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description"><?= $video['description']; ?></textarea>
 
-            <label for="season">Season:</label>
-            <input type="number" id="season" name="season" value="<?= $video['season']; ?>">
+                <label for="filepath">File Path:</label>
+                <input type="text" id="filepath" name="filepath" value="<?= $video['filePath']; ?>">
 
-            <label for="episode">Episode:</label>
-            <input type="number" id="episode" name="episode" value="<?= $video['episode']; ?>">
+                <label for="season">Season:</label>
+                <input type="number" id="season" name="season" value="<?= $video['season']; ?>">
 
-            <label for="releaseDate">Release Date:</label>
-            <input type="date" id="releaseDate" name="releaseDate" value="<?= $video['releaseDate']; ?>">
-            <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
-            <button type="submit" name="updateVideo">Update</button>
-            <?php
-            if (isset($successMessage)) {
-                echo '<span class="alertSuccess">' . $successMessage . '</span>';
-            }
-            ?>
-            <a href="/adminEdit">Return to video list</a>
-        </form>
+                <label for="episode">Episode:</label>
+                <input type="number" id="episode" name="episode" value="<?= $video['episode']; ?>">
 
+                <label for="releaseDate">Release Date:</label>
+                <input type="date" id="releaseDate" name="releaseDate" value="<?= $video['releaseDate']; ?>">
+                <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
+                <button type="submit" class="updateVideoBtn" name="updateVideo">Update</button>
+                <button type="submit" class="deleteVideoBtn" name="deleteVideo">Delete</button>
+
+                <?php
+                if (isset($successMessage)) {
+                    echo '<span class="alertSuccess">' . $successMessage . '</span>';
+                }
+                ?>
+                <a href="/adminEdit">Return to video list</a>
+            </form>
+        <?php } ?>
     </div>
 
 

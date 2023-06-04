@@ -18,6 +18,10 @@ if (isset($_POST["updateVideo"]) && $_SESSION["csrf_token"] === $_POST["csrf_tok
     $videosModel->updateVideo($id, $videoData);
     $successMessage = "Video successfully updated";
 
+} else if (isset($_POST["deleteVideo"]) && $_SESSION["csrf_token"] === $_POST["csrf_token"]) {
+
+    $videosModel->removeVideo($id);
+    $successMessage = "Video successfully deleted";
 }
 
 $video = $videosModel->getVideoById($id);

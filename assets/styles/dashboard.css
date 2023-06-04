@@ -6,7 +6,7 @@
 }
 
 :root {
-  --blue: #453bae;
+  --blue: #332c84;
   --white: #fff;
   --gray: #f5f5f5;
   --black1: #222;
@@ -509,9 +509,18 @@ td a:hover {
   margin-bottom: 10px;
 }
 
-.editForm button {
+.editForm .updateVideoBtn {
   padding: 10px 20px;
-  background-color: #e32c1b;
+  background-color: #54e31b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+.editForm .deleteVideoBtn {
+  padding: 10px 20px;
+  background-color: #e91b0c;
   color: white;
   border: none;
   border-radius: 5px;
@@ -554,6 +563,26 @@ td a:hover {
 }
 .navigation h1 {
   font-size: large;
+}
+
+.deletedContainer {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.deletedVideo {
+  color: rgb(207, 34, 34);
+}
+
+.deletedVideo + a {
+  color: rgb(61, 61, 66);
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+}
+.deletedVideo + a:hover {
+  color: rgb(137, 137, 238);
 }
 
 @media (max-width: 768px) {

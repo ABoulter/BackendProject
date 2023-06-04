@@ -17,6 +17,15 @@ class Videos extends Base
         return $query->fetchAll();
     }
 
+    public function removeVideo($videoId)
+    {
+
+        $query = "DELETE FROM videos WHERE id = ?";
+        $statement = $this->db->prepare($query);
+
+        $statement->execute([$videoId]);
+    }
+
     public function getVideos($entityId, $season = null)
     {
         $query = "SELECT * FROM videos WHERE entityId = ?";
