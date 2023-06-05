@@ -630,40 +630,65 @@ td a:hover {
 }
 
 /* Custom styles for the newEntityContainer section */
-#newEntityContainer {
-  display: none;
-  margin-top: 20px;
+.entityForm {
+  width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #7993c5;
+  border: 1px solid #ccc;
+  border-radius: 10px;
 }
 
-#newEntityContainer h2 {
+.entityForm h2 {
+  font-size: 18px;
   margin-bottom: 10px;
 }
 
-.newEntityForm label {
+.entityForm label {
   display: block;
   margin-bottom: 10px;
+  margin-top: 10px;
   font-weight: bold;
 }
 
-.newEntityForm input[type="text"],
-.newEntityForm select {
+.entityForm input[type="text"],
+.entityForm input[type="file"],
+.entityForm select {
   width: 100%;
   padding: 8px;
-  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
   border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
 }
 
-.newEntityForm button[type="submit"] {
+.entityForm button[type="submit"] {
   padding: 10px 20px;
-  background-color: #4caf50;
-  color: #fff;
+  background-color: #54e31b;
+  color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
 }
 
-.newEntityForm button[type="submit"]:hover {
-  background-color: #45a049;
+.entityForm button[type="submit"]:hover {
+  background-color: white;
+  color: black;
+}
+.entityBtn {
+  padding: 10px 20px;
+  background-color: rgb(0, 188, 185);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+.entityBtn:hover {
+  background-color: white;
+  color: black;
 }
 @media (max-width: 768px) {
   .details {

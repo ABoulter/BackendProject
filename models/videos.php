@@ -25,39 +25,39 @@ class Videos extends Base
         $entityId = $videoData['entityId'];
 
 
-        $result = $this->db->prepare("SELECT COUNT(*) AS count FROM videos WHERE entityId = :entityId AND season = :season AND episode = :episode");
-        $result->bindValue(':entityId', $entityId);
-        $result->bindValue(':season', $season);
-        $result->bindValue(':episode', $episode);
-        $result->execute();
-        $rowCount = $result->fetch()['count'];
+        $query = $this->db->prepare("SELECT COUNT(*) AS count FROM videos WHERE entityId = :entityId AND season = :season AND episode = :episode");
+        $query->bindValue(':entityId', $entityId);
+        $query->bindValue(':season', $season);
+        $query->bindValue(':episode', $episode);
+        $query->execute();
+        $rowCount = $query->fetch()['count'];
 
         if ($videoData['isMovie']) {
 
-            $result = $this->db->prepare("SELECT COUNT(*) AS count FROM videos WHERE entityId = :entityId AND isMovie = 1");
-            $result->bindValue(':entityId', $entityId);
-            $result->execute();
-            $rowCount += $result->fetch()['count'];
+            $query = $this->db->prepare("SELECT COUNT(*) AS count FROM videos WHERE entityId = :entityId AND isMovie = 1");
+            $query->bindValue(':entityId', $entityId);
+            $query->execute();
+            $rowCount += $query->fetch()['count'];
         }
 
         if ($rowCount > 0) {
             return false;
         }
 
-        $result = $this->db->prepare("INSERT INTO videos (title, description, filePath, isMovie, uploadDate, releaseDate, views, duration, season, episode, entityId) 
+        $query = $this->db->prepare("INSERT INTO videos (title, description, filePath, isMovie, uploadDate, releaseDate, views, duration, season, episode, entityId) 
                   VALUES (:title, :description, :filePath, :isMovie, :uploadDate, :releaseDate, :views, :duration, :season, :episode,  :entityId)");
-        $result->bindValue(':title', $videoData['title']);
-        $result->bindValue(':description', $videoData['description']);
-        $result->bindValue(':filePath', $videoData['filePath']);
-        $result->bindValue(':isMovie', $videoData['isMovie']);
-        $result->bindValue(':uploadDate', $videoData['uploadDate']);
-        $result->bindValue(':releaseDate', $videoData['releaseDate']);
-        $result->bindValue(':views', $videoData['views']);
-        $result->bindValue(':duration', $videoData['duration']);
-        $result->bindValue(':season', $videoData['season']);
-        $result->bindValue(':episode', $videoData['episode']);
-        $result->bindValue(':entityId', $videoData['entityId']);
-        $result->execute();
+        $query->bindValue(':title', $videoData['title']);
+        $query->bindValue(':description', $videoData['description']);
+        $query->bindValue(':filePath', $videoData['filePath']);
+        $query->bindValue(':isMovie', $videoData['isMovie']);
+        $query->bindValue(':uploadDate', $videoData['uploadDate']);
+        $query->bindValue(':releaseDate', $videoData['releaseDate']);
+        $query->bindValue(':views', $videoData['views']);
+        $query->bindValue(':duration', $videoData['duration']);
+        $query->bindValue(':season', $videoData['season']);
+        $query->bindValue(':episode', $videoData['episode']);
+        $query->bindValue(':entityId', $videoData['entityId']);
+        $query->execute();
 
         return $this->db->lastInsertId();
     }

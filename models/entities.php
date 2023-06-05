@@ -27,6 +27,34 @@ class Entities extends Base
         return $result->fetchAll();
     }
 
+    public function createEntity($entityData)
+    {
+
+
+
+        $query = $this->db->prepare("SELECT COUNT(*) as count FROM entities WHERE name = :name");
+        $query->bindValue(':name', $entityData['name']);
+        $query->execute();
+        $nameExists = $query->fetch()['count'];
+
+        if ($nameExists) {
+            return false;
+        }
+
+
+        $query = $this->db->prepare("INSERT INTO entities (name, thumbnail, preview, categoryId) 
+                  VALUES (:name, :thumbnail, :preview, :categoryId)");
+        $query->bindValue(':name', $entityData['name']);
+        $query->bindValue(':thumbnail', $entityData['thumbnail']);
+        $query->bindValue(':preview', $entityData['preview']);
+        $query->bindValue(':categoryId', $entityData['categoryId']);
+
+        $query->execute();
+
+
+        return $this->db->lastInsertId();
+    }
+
 
 
     public function getRandomEntity()

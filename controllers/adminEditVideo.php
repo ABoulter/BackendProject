@@ -6,10 +6,15 @@ $videosModel = new Videos();
 
 if (isset($_POST["updateVideo"]) && $_SESSION["csrf_token"] === $_POST["csrf_token"]) {
 
+    $filePathDestination = 'entities/videos/';
+    $filePathTmpPath = $_FILES["filePath"]["tmp_name"];
+    $filePath = $_FILES["filePath"]["name"];
+    move_uploaded_file($filePathTmpPath, $filePathDestination . $filePath);
+
     $videoData = [
         'title' => $_POST["title"],
         'description' => $_POST["description"],
-        'filepath' => $_POST["filepath"],
+        'filepath' => $filePathDestination . $filePath,
         'season' => $_POST["season"],
         'episode' => $_POST["episode"],
         'releaseDate' => $_POST["releaseDate"]

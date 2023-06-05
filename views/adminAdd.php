@@ -42,6 +42,7 @@
                 <?php } ?>
             </select>
 
+            <button type="button" class="entityBtn" onclick="toggleNewEntityForm()">Create New Entity</button>
             <label for="isMovie">Is it a Movie?</label>
             <select id="isMovie" name="isMovie">
                 <option value="0">No</option>
@@ -50,6 +51,34 @@
             <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
             <button type="submit" name="createVideo">Create</button>
             <a href="/adminEdit">Cancel</a>
+            <?php
+            if (isset($successMessage)) {
+                echo '<span class="alertSuccess">' . $successMessage . '</span>';
+            } else if (isset($errorMessage)) {
+                echo '<span class="alertError">' . $errorMessage . '</span>';
+            }
+            ?>
+        </form>
+        <form class="entityForm" method="POST" action="/adminAdd" enctype="multipart/form-data" style="display: none;">
+            <h2>Create New Entity</h2>
+            <label for="entityName">Name:</label>
+            <input type="text" id="entityName" name="entityName">
+
+            <label for="entityThumbnail">Thumbnail:</label>
+            <input type="file" id="thumbnail" name="thumbnail">
+
+            <label for="entityPreview">Preview:</label>
+            <input type="file" id="preview" name="preview">
+
+            <label for="entityCategory">Category:</label>
+            <select id="entityCategory" name="categorySelect">
+                <option value="">-- Select Category --</option>
+                <?php foreach ($categories as $category) { ?>
+                    <option value="<?= $category['id']; ?>"><?= $category['name']; ?></option>
+                <?php } ?>
+            </select>
+            <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
+            <button type="submit" name="createEntity">Create</button>
             <?php
             if (isset($successMessage)) {
                 echo '<span class="alertSuccess">' . $successMessage . '</span>';
@@ -88,6 +117,20 @@
 
         isMovieSelect.dispatchEvent(new Event("change"));
     });
+
+    function toggleNewEntityForm() {
+        const entityForm = document.querySelector(".entityForm");
+        const createNewEntityButton = document.querySelector("button[type='button']");
+
+        if (entityForm.style.display === "none") {
+            entityForm.style.display = "block";
+            createNewEntityButton.innerText = "Cancel";
+            entityForm.scrollIntoView({ behavior: "smooth" })
+        } else {
+            entityForm.style.display = "none";
+            createNewEntityButton.innerText = "Create New Entity";
+        }
+    } 
 </script>
 
 </html>

@@ -33,8 +33,8 @@
                 <label for="description">Description:</label>
                 <textarea id="description" name="description"><?= $video['description']; ?></textarea>
 
-                <label for="filepath">File Path:</label>
-                <input type="text" id="filepath" name="filepath" value="<?= $video['filePath']; ?>">
+                <label for="filepath">Video:</label>
+                <input type="file" id="filepath" name="filePath">
 
                 <label for="season">Season:</label>
                 <input type="number" id="season" name="season" value="<?= $video['season']; ?>">
