@@ -15,6 +15,19 @@ class Entities extends Base
         return $query->fetchAll();
     }
 
+    public function getAllEntities()
+    {
+
+        $query = "SELECT * FROM entities";
+
+
+        $result = $this->db->prepare($query);
+        $result->execute();
+
+        return $result->fetchAll();
+    }
+
+
 
     public function getRandomEntity()
     {

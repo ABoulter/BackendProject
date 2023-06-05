@@ -22,7 +22,8 @@ $allowed_controllers = [
     "billing",
     "adminDashboard",
     "adminEdit",
-    "adminEditVideo"
+    "adminEditVideo",
+    "adminAdd"
 ];
 
 if (!empty($url_parts[1])) {

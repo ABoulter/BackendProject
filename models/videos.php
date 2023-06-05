@@ -17,6 +17,52 @@ class Videos extends Base
         return $query->fetchAll();
     }
 
+    public function createVideo($videoData)
+    {
+
+        $season = $videoData['season'];
+        $episode = $videoData['episode'];
+        $entityId = $videoData['entityId'];
+
+
+        $result = $this->db->prepare("SELECT COUNT(*) AS count FROM videos WHERE entityId = :entityId AND season = :season AND episode = :episode");
+        $result->bindValue(':entityId', $entityId);
+        $result->bindValue(':season', $season);
+        $result->bindValue(':episode', $episode);
+        $result->execute();
+        $rowCount = $result->fetch()['count'];
+
+        if ($videoData['isMovie']) {
+
+            $result = $this->db->prepare("SELECT COUNT(*) AS count FROM videos WHERE entityId = :entityId AND isMovie = 1");
+            $result->bindValue(':entityId', $entityId);
+            $result->execute();
+            $rowCount += $result->fetch()['count'];
+        }
+
+        if ($rowCount > 0) {
+            return false;
+        }
+
+        $result = $this->db->prepare("INSERT INTO videos (title, description, filePath, isMovie, uploadDate, releaseDate, views, duration, season, episode, entityId) 
+                  VALUES (:title, :description, :filePath, :isMovie, :uploadDate, :releaseDate, :views, :duration, :season, :episode,  :entityId)");
+        $result->bindValue(':title', $videoData['title']);
+        $result->bindValue(':description', $videoData['description']);
+        $result->bindValue(':filePath', $videoData['filePath']);
+        $result->bindValue(':isMovie', $videoData['isMovie']);
+        $result->bindValue(':uploadDate', $videoData['uploadDate']);
+        $result->bindValue(':releaseDate', $videoData['releaseDate']);
+        $result->bindValue(':views', $videoData['views']);
+        $result->bindValue(':duration', $videoData['duration']);
+        $result->bindValue(':season', $videoData['season']);
+        $result->bindValue(':episode', $videoData['episode']);
+        $result->bindValue(':entityId', $videoData['entityId']);
+        $result->execute();
+
+        return $this->db->lastInsertId();
+    }
+
+
     public function removeVideo($videoId)
     {
 
