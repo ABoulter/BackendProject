@@ -21,7 +21,10 @@
         </a>
         <a href="/profile">
             <i class="fa-solid fa-user"></i>
+            <?= $username ?>
         </a>
+
+
         <?php if ($admin) { ?>
             <a href="/adminDashboard">
                 <i class="fa-solid fa-hammer"></i>

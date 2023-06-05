@@ -29,7 +29,7 @@ if (isset($_POST["submitButton"]) && $_SESSION["csrf_token"] === $_POST["csrf_to
             header("Location: home");
             exit();
         } else {
-            $message = "Login failed";
+            $message = "Login failed, check your username or password";
         }
     }
 

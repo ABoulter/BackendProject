@@ -43,7 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         $model->addVideoProgress($data);
 
 
-
         $response = "Video progress added successfully.";
     } else {
         http_response_code(404);
