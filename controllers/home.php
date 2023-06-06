@@ -21,6 +21,7 @@ foreach ($categories as $category) {
 
 $userInProgress = $videoProgressModel->isInProgress($userId);
 
+
 if ($userInProgress) {
     $lastSeenVideo = $videoModel->getLastSeenVideo($userId);
     $videoId = $lastSeenVideo['videoId'];
@@ -31,6 +32,7 @@ if ($userInProgress) {
 
 $video = $videoModel->getVideoById($videoId);
 $entity = $entitiesModel->getEntityById($video["entityId"]);
+
 
 
 require("views/home.php");

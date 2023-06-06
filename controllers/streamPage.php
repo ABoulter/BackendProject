@@ -45,7 +45,7 @@ foreach ($seasons as $seasonNumber) {
 
 $lastSeenVideo = $videosModel->getLastSeenVideo($userId);
 
-if ($lastSeenVideo && $lastSeenVideo["entityId"] == $id) {
+if ($lastSeenVideo && $lastSeenVideo["entityId"] == $id && !$hasSeen) {
     $lastSeenVideoData = $videosModel->getVideoById($lastSeenVideo['videoId']);
 } else {
     $firstEpisodeId = $videosModel->getFirstEpisodeId($entity["id"]);

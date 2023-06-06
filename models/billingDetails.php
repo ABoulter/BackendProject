@@ -6,8 +6,9 @@ class BillingDetails extends Base
     public function insertDetails($agreement, $token, $userId)
     {
 
-        $query = $this->db->prepare("INSERT INTO billingDetails(agreementId, nextBillingDate, token, userId)
-                               VALUES(:agreementId, :nextBillingDate, :token, :username)");
+        $query = $this->db->prepare("INSERT INTO billingDetails
+                                    (agreementId, nextBillingDate, token, userId)
+                                    VALUES(:agreementId, :nextBillingDate, :token, :username)");
 
         $agreementDetails = $agreement->getAgreementDetails();
 

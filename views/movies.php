@@ -10,7 +10,7 @@
     <script src="https://kit.fontawesome.com/07c012f958.js" crossorigin="anonymous"></script>
     <script src="assets/js/script.js"></script>
 
-    <title>Movies</title>
+    <title>Ductape: Movies</title>
 
 </head>
 

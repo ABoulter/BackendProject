@@ -23,7 +23,9 @@ $allowed_controllers = [
     "adminDashboard",
     "adminEdit",
     "adminEditVideo",
-    "adminAdd"
+    "adminAdd",
+    "adminEntity",
+    "adminEditEntity"
 ];
 
 if (!empty($url_parts[1])) {

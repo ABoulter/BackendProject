@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video List</title>
+    <title>Entity List</title>
     <link rel="stylesheet" href="assets/styles/dashboard.css">
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
@@ -17,8 +17,8 @@
     <?php include("views/templates/dashboardMenu.php") ?>
     <div class="main">
         <div class="details">
-            <div class="recentVideos">
-                <h1>Edit Videos</h1>
+            <div class="recentEntities">
+                <h1>Edit Entities</h1>
                 <div class="cardHeader">
 
 
@@ -26,64 +26,36 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>File Path</th>
-                                <th>Season</th>
-                                <th>Episode</th>
-                                <th>Release Date</th>
-                                <th>Views</th>
-                                <th>Duration</th>
-                                <th>Entity</th>
-                                <th>Action</th>
+                                <th>Name</th>
+                                <th>Thumbnail</th>
+                                <th>Preview</th>
+                                <th>Category</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($videos as $video) { ?>
+                            <?php foreach ($entities as $entity) { ?>
                                 <tr>
                                     <td>
-                                        <?= $video['id']; ?>
+                                        <?= $entity['id']; ?>
                                     </td>
                                     <td>
-                                        <?= $video['title']; ?>
+                                        <?= $entity['name']; ?>
+                                    </td>
+
+                                    <td>
+                                        <?= $entity['thumbnail']; ?>
                                     </td>
                                     <td>
-                                        <?php if (strlen($video['description']) > 30) { ?>
-                                            <span class="description">
-                                                <?= substr($video['description'], 0, 30); ?>...
-                                            </span>
-                                        <?php } else { ?>
-                                            <span class="description">
-                                                <?= $video['description']; ?>
-                                            </span>
-                                        <?php } ?>
-                                    </td>
-                                    <td>
-                                        <?= $video['filePath']; ?>
-                                    </td>
-                                    <td>
-                                        <?= $video['season']; ?>
-                                    </td>
-                                    <td>
-                                        <?= $video['episode']; ?>
-                                    </td>
-                                    <td>
-                                        <?= $video['releaseDate']; ?>
-                                    </td>
-                                    <td>
-                                        <?= $video['views']; ?>
-                                    </td>
-                                    <td>
-                                        <?= $video['duration']; ?>
+                                        <?= $entity['preview']; ?>
                                     </td>
                                     <td>
                                         <?php
-                                        $entity = $entitiesModel->getEntityName($video["entityId"]);
-                                        echo $entity['name'];
+                                        $category = $categoriesModel->getCategoryName($entity["categoryId"]);
+                                        echo $category["name"];
                                         ?>
                                     </td>
                                     <td>
-                                        <a href="/adminEditVideo/<?= $video['id']; ?>">Edit</a>
+                                        <a href="/adminEditEntity/<?= $entity['id']; ?>">Edit</a>
                                     </td>
                                 </tr>
                             <?php }

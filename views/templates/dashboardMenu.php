@@ -37,6 +37,14 @@
                 </a>
             </li>
             <li>
+                <a href="/adminEntity">
+                    <span class="icon">
+                        <ion-icon name="settings-sharp"></ion-icon>
+                    </span>
+                    <span class="title">Edit Entity</span>
+                </a>
+            </li>
+            <li>
                 <a href="/">
                     <span class="icon">
                         <ion-icon name="arrow-undo-outline"></ion-icon>

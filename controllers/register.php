@@ -1,5 +1,4 @@
 <?php
-
 require_once("models/users.php");
 require_once("helpers/RememberFields.php");
 

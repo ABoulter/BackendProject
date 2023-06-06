@@ -5,6 +5,9 @@ require_once("models/videos.php");
 $videosModel = new Videos();
 
 if (isset($_POST["updateVideo"]) && $_SESSION["csrf_token"] === $_POST["csrf_token"]) {
+    foreach ($_POST as $key => $value) {
+        $_POST[$key] = trim(htmlspecialchars(strip_tags($value)));
+    }
 
     $filePathDestination = 'entities/videos/';
     $filePathTmpPath = $_FILES["filePath"]["tmp_name"];

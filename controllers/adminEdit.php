@@ -1,9 +1,11 @@
 <?php
 require_once("adminAuth.php");
 require_once("models/videos.php");
+require_once("models/entities.php");
 
 
 $videosModel = new Videos();
+$entitiesModel = new Entities();
 
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 
@@ -13,7 +15,7 @@ $totalPages = ceil($totalVideos / $perPage);
 
 $page = max(1, min($page, $totalPages));
 
-$videos = $videosModel->get($page, $perPage);
+$videos = $videosModel->getPage($page, $perPage);
 
 
 

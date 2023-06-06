@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../assets/styles/style.css" />
     <script src="https://kit.fontawesome.com/07c012f958.js" crossorigin="anonymous"></script>
-    <title>Search</title>
+    <title>Search Ductape</title>
 </head>
 
 <body>

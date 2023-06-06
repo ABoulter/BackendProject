@@ -6,7 +6,11 @@ class Users extends Base
     public function register($data)
     {
 
-        $query = $this->db->prepare("SELECT id FROM users WHERE email = ? OR username = ?");
+        $query = $this->db->prepare("SELECT id 
+                                    FROM users 
+                                    WHERE email = ? 
+                                    OR username = ?");
+
         $query->execute([$data['email'], $data['username']]);
 
         if ($query->rowCount() > 0) {
@@ -14,7 +18,10 @@ class Users extends Base
         }
         $password = password_hash($data['password'], PASSWORD_DEFAULT);
 
-        $query = $this->db->prepare("INSERT INTO users (firstName, lastName, username, email, password) VALUES (?, ?, ?, ?, ?)");
+        $query = $this->db->prepare("INSERT INTO users 
+                                    (firstName, lastName, username, email, password) 
+                                    VALUES (?, ?, ?, ?, ?)");
+
         $query->execute([$data['firstName'], $data['lastName'], $data['username'], $data['email'], $password]);
 
         return $this->db->lastInsertId();
@@ -22,10 +29,9 @@ class Users extends Base
 
     public function login($username)
     {
-        $query = $this->db->prepare("
-            SELECT id, username, email, password, isAdmin
-            FROM users
-            WHERE username = ?
+        $query = $this->db->prepare("SELECT id, username, email, password, isAdmin
+                                    FROM users
+                                    WHERE username = ?
         ");
 
         $query->execute([
@@ -39,7 +45,9 @@ class Users extends Base
     public function getUser($userId)
     {
 
-        $query = $this->db->prepare("SELECT * FROM users WHERE id= ?");
+        $query = $this->db->prepare("SELECT * 
+                                    FROM users 
+                                    WHERE id= ?");
 
         $query->execute([$userId]);
 
@@ -47,7 +55,9 @@ class Users extends Base
     }
     function updateUserDetails($userId, $data)
     {
-        $query = $this->db->prepare("UPDATE users SET firstName = ?, lastName = ?, email = ? WHERE id = ?");
+        $query = $this->db->prepare("UPDATE users 
+                                    SET firstName = ?, lastName = ?, email = ? 
+                                    WHERE id = ?");
 
         $firstName = $data['firstName'];
         $lastName = $data['lastName'];
@@ -68,7 +78,9 @@ class Users extends Base
     {
         $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
-        $query = $this->db->prepare("UPDATE users SET password = ? WHERE id = ?");
+        $query = $this->db->prepare("UPDATE users 
+                                    SET password = ? 
+                                    WHERE id = ?");
         $query->execute([$hashedPassword, $userId]);
 
         return $query->rowCount() > 0;
@@ -76,8 +88,9 @@ class Users extends Base
 
     public function setIsSubscribed($value, $userId)
     {
-        $query = $this->db->prepare("UPDATE users SET isSubscribed = ?
-                                WHERE id = ?");
+        $query = $this->db->prepare("UPDATE users 
+                                    SET isSubscribed = ?
+                                    WHERE id = ?");
 
         if ($query->execute([$value, $userId])) {
             return true;

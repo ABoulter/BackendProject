@@ -26,10 +26,10 @@
             <input type="file" id="filepath" name="filePath" required>
 
             <label for="season">Season:</label>
-            <input type="number" id="season" name="season">
+            <input type="number" id="season" name="season" value=0>
 
             <label for="episode">Episode:</label>
-            <input type="number" id="episode" name="episode">
+            <input type="number" id="episode" name="episode" value=0>
 
             <label for="releaseDate">Release Date:</label>
             <input type="date" id="releaseDate" name="releaseDate" required>

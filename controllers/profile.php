@@ -84,7 +84,6 @@ if (isset($_GET['success']) && $_GET['success'] == 'true') {
 
 
     try {
-        // Execute agreement
         $agreement->execute($token, $apiContext);
         $billingDetails = new BillingDetails;
         $result = $billingDetails->insertDetails($agreement, $token, $userId);
@@ -95,7 +94,6 @@ if (isset($_GET['success']) && $_GET['success'] == 'true') {
             $user["isSubscribed"] = true;
         }
 
-        // Update user's account status
 
     } catch (PayPal\Exception\PayPalConnectionException $ex) {
         $wrongMessage = "Something went wrong";

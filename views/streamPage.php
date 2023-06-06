@@ -57,12 +57,13 @@
                         <?php } ?>
                     <?php } ?>
                     <div class='buttons'>
-                        <?php if ($lastSeenVideo && $lastSeenVideo["entityId"] == $id) { ?>
+                        <?php if ($lastSeenVideo && $lastSeenVideo["entityId"] == $id && $lastSeenVideo["isFinished"] == 0) { ?>
                             <button onclick="watchVideo(<?= $lastSeenVideo['videoId'] ?>)">
                                 <i class='fas fa-play'></i> Continue Watching
                             </button>
                         <?php } else { ?>
-                            <button onclick="watchVideo(<?= $firstEpisodeId ?>)"><i class='fas fa-play'></i> Play</button>
+                            <button onclick="watchVideo(<?= $firstEpisodeId['id'] ?>)"><i class='fas fa-play'></i>
+                                Play</button>
                         <?php } ?>
                         <button onclick='volumeToggle(this)'><i class='fas fa-volume-off'></i></button>
                     </div>

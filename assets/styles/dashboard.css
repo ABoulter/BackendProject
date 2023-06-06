@@ -259,7 +259,8 @@ body {
   grid-gap: 30px;
 }
 
-.details .recentVideos {
+.details .recentVideos,
+.recentEntities {
   position: relative;
   display: grid;
   min-height: 500px;
@@ -295,27 +296,34 @@ body {
 .details table thead td {
   font-weight: 600;
 }
-.details .recentVideos table tr {
+.details .recentVideos table tr,
+.recentEntities table tr {
   color: var(--black1);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-.details .recentVideos table tr:last-child {
+.details .recentVideos table tr:last-child,
+.recentEntities table tr:last-child {
   border-bottom: none;
 }
-.details .recentVideos table tbody tr:hover {
+.details .recentVideos table tbody tr:hover,
+.recentEntities table tbody tr:hover {
   background: var(--blue);
   color: var(--white);
 }
-.details .recentVideos table tr td {
+.details .recentVideos table tr td,
+.recentEntities table tr td {
   padding: 10px;
 }
-.details .recentVideos table tr td:last-child {
+.details .recentVideos table tr td:last-child,
+.recentEntities table tr td:last-child {
   text-align: end;
 }
-.details .recentVideos table tr td:nth-child(2) {
+.details .recentVideos table tr td:nth-child(2),
+.recentEntities table tr td:nth-child(2) {
   text-align: end;
 }
-.details .recentVideos table tr td:nth-child(3) {
+.details .recentVideos table tr td:nth-child(3),
+.recentEntities table tr td:nth-child(3) {
   text-align: center;
 }
 .status.delivered {
@@ -509,7 +517,8 @@ td a:hover {
   margin-bottom: 10px;
 }
 
-.editForm .updateVideoBtn {
+.editForm .updateVideoBtn,
+.updateEntityBtn {
   padding: 10px 20px;
   background-color: #54e31b;
   color: white;
@@ -518,7 +527,8 @@ td a:hover {
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 }
-.editForm .deleteVideoBtn {
+.editForm .deleteVideoBtn,
+.deleteEntityBtn {
   padding: 10px 20px;
   background-color: #e91b0c;
   color: white;
@@ -570,18 +580,21 @@ td a:hover {
   margin-top: 100px;
 }
 
-.deletedVideo {
+.deletedVideo,
+.deletedEntity {
   color: rgb(207, 34, 34);
 }
 
-.deletedVideo + a {
+.deletedVideo + a,
+.deletedEntity + a {
   color: rgb(61, 61, 66);
   font-weight: bold;
   text-decoration: none;
   display: inline-block;
   margin-top: 10px;
 }
-.deletedVideo + a:hover {
+.deletedVideo + a:hover,
+.deletedEntity + a:hover {
   color: rgb(137, 137, 238);
 }
 
@@ -694,7 +707,8 @@ td a:hover {
   .details {
     grid-template-columns: 1fr;
   }
-  .recentVideos {
+  .recentVideos,
+  .recentEntities {
     overflow-x: auto;
   }
   .status.inProgress {

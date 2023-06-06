@@ -54,6 +54,7 @@ if (isset($_POST["createEntity"]) && $_SESSION["csrf_token"] === $_POST["csrf_to
     foreach ($_POST as $key => $value) {
         $_POST[$key] = trim(htmlspecialchars(strip_tags($value)));
     }
+
     $thumbnailDestination = 'entities/thumbnails/';
     $previewDestination = 'entities/previews/';
 
@@ -88,8 +89,6 @@ $_SESSION["csrf_token"] = bin2hex(random_bytes(16));
 
 $entities = $entitiesModel->getAllEntities();
 $categories = $categoriesModel->getCategories();
-
-
 
 
 require("views/adminAdd.php");

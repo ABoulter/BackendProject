@@ -5,76 +5,16 @@ require_once("base.php");
 class Videos extends Base
 {
 
-    public function get($page, $perPage)
-    {
-        $offset = ($page - 1) * $perPage;
-
-        $query = $this->db->prepare("SELECT * FROM videos ORDER BY releaseDate DESC LIMIT ?, ?");
-        $query->bindParam(1, $offset, PDO::PARAM_INT);
-        $query->bindParam(2, $perPage, PDO::PARAM_INT);
-        $query->execute();
-
-        return $query->fetchAll();
-    }
-
-    public function createVideo($videoData)
-    {
-
-        $season = $videoData['season'];
-        $episode = $videoData['episode'];
-        $entityId = $videoData['entityId'];
 
 
-        $query = $this->db->prepare("SELECT COUNT(*) AS count FROM videos WHERE entityId = :entityId AND season = :season AND episode = :episode");
-        $query->bindValue(':entityId', $entityId);
-        $query->bindValue(':season', $season);
-        $query->bindValue(':episode', $episode);
-        $query->execute();
-        $rowCount = $query->fetch()['count'];
 
-        if ($videoData['isMovie']) {
-
-            $query = $this->db->prepare("SELECT COUNT(*) AS count FROM videos WHERE entityId = :entityId AND isMovie = 1");
-            $query->bindValue(':entityId', $entityId);
-            $query->execute();
-            $rowCount += $query->fetch()['count'];
-        }
-
-        if ($rowCount > 0) {
-            return false;
-        }
-
-        $query = $this->db->prepare("INSERT INTO videos (title, description, filePath, isMovie, uploadDate, releaseDate, views, duration, season, episode, entityId) 
-                  VALUES (:title, :description, :filePath, :isMovie, :uploadDate, :releaseDate, :views, :duration, :season, :episode,  :entityId)");
-        $query->bindValue(':title', $videoData['title']);
-        $query->bindValue(':description', $videoData['description']);
-        $query->bindValue(':filePath', $videoData['filePath']);
-        $query->bindValue(':isMovie', $videoData['isMovie']);
-        $query->bindValue(':uploadDate', $videoData['uploadDate']);
-        $query->bindValue(':releaseDate', $videoData['releaseDate']);
-        $query->bindValue(':views', $videoData['views']);
-        $query->bindValue(':duration', $videoData['duration']);
-        $query->bindValue(':season', $videoData['season']);
-        $query->bindValue(':episode', $videoData['episode']);
-        $query->bindValue(':entityId', $videoData['entityId']);
-        $query->execute();
-
-        return $this->db->lastInsertId();
-    }
-
-
-    public function removeVideo($videoId)
-    {
-
-        $query = "DELETE FROM videos WHERE id = ?";
-        $statement = $this->db->prepare($query);
-
-        $statement->execute([$videoId]);
-    }
 
     public function getVideos($entityId, $season = null)
     {
-        $query = "SELECT * FROM videos WHERE entityId = ?";
+        $query = "SELECT * 
+                FROM videos 
+                WHERE entityId = ?";
+
         $entity = [$entityId];
 
         if ($season !== 0) {
@@ -93,7 +33,10 @@ class Videos extends Base
 
     public function getSeasons($entityId)
     {
-        $query = $this->db->prepare("SELECT DISTINCT season FROM videos WHERE entityId = ?");
+        $query = $this->db->prepare("SELECT DISTINCT season 
+                                    FROM videos 
+                                    WHERE entityId = ?");
+
         $query->execute([$entityId]);
         $seasons = $query->fetchAll(PDO::FETCH_COLUMN);
 
@@ -103,14 +46,19 @@ class Videos extends Base
 
     public function getVideoById($id)
     {
-        $query = $this->db->prepare("SELECT * FROM videos WHERE id = ?");
+        $query = $this->db->prepare("SELECT * 
+                                    FROM videos WHERE id = ?");
+
         $query->execute([$id]);
         return $query->fetch();
     }
 
     public function incrementViews($id)
     {
-        $query = $this->db->prepare("UPDATE videos SET views=views+1 WHERE id = ?");
+        $query = $this->db->prepare("UPDATE videos 
+                                    SET views=views+1 
+                                    WHERE id = ?");
+
         $query->execute([$id]);
     }
 
@@ -151,7 +99,7 @@ class Videos extends Base
 
     public function getLastSeenVideo($userId)
     {
-        $query = $this->db->prepare("SELECT videos.id AS videoId, videos.filePath, videos.entityId, videos.isMovie, videos.season, videos.episode, videos.title
+        $query = $this->db->prepare("SELECT videos.id AS videoId, videos.filePath, videos.entityId, videos.isMovie, videos.season, videos.episode, videos.title, videoProgress.isFinished
                                     FROM videos
                                     INNER JOIN videoProgress ON videos.id = videoProgress.videoId
                                     WHERE videoProgress.userId = ?
@@ -206,7 +154,10 @@ class Videos extends Base
 
     public function getTotalViews()
     {
-        $query = $this->db->prepare("SELECT SUM(views) AS totalViews FROM videos");
+        $query = $this->db->prepare("SELECT SUM(views) 
+                                    AS totalViews 
+                                    FROM videos");
+
         $query->execute();
 
         $result = $query->fetch();
@@ -217,7 +168,9 @@ class Videos extends Base
 
     public function updateVideo($videoId, $videoData)
     {
-        $query = $this->db->prepare("UPDATE videos SET title = ?, description = ?, filepath = ?, season = ?, episode = ?, releaseDate = ? WHERE id = ?");
+        $query = $this->db->prepare("UPDATE videos 
+                                    SET title = ?, description = ?, filepath = ?, season = ?, episode = ?, releaseDate = ? 
+                                    WHERE id = ?");
 
         $title = $videoData['title'];
         $description = $videoData['description'];
@@ -233,11 +186,96 @@ class Videos extends Base
 
     public function getTotalVideosCount()
     {
-        $query = $this->db->prepare("SELECT COUNT(*) as total FROM videos");
+        $query = $this->db->prepare("SELECT COUNT(*) 
+                                    AS total 
+                                    FROM videos");
         $query->execute();
 
         $result = $query->fetch();
         return $result['total'];
+    }
+
+    public function createVideo($videoData)
+    {
+
+        $season = $videoData['season'];
+        $episode = $videoData['episode'];
+        $entityId = $videoData['entityId'];
+
+
+        $query = $this->db->prepare("SELECT COUNT(*) 
+                                    AS count 
+                                    FROM videos 
+                                    WHERE entityId = :entityId AND season = :season AND episode = :episode");
+
+        $query->bindValue(':entityId', $entityId);
+        $query->bindValue(':season', $season);
+        $query->bindValue(':episode', $episode);
+        $query->execute();
+        $rowCount = $query->fetch()['count'];
+
+        if ($videoData['isMovie']) {
+
+            $query = $this->db->prepare("SELECT COUNT(*) 
+                                        AS count 
+                                        FROM videos 
+                                        WHERE entityId = :entityId AND isMovie = 1");
+
+            $query->bindValue(':entityId', $entityId);
+            $query->execute();
+            $rowCount += $query->fetch()['count'];
+        }
+
+        if ($rowCount > 0) {
+            return false;
+        }
+
+        $query = $this->db->prepare("INSERT INTO videos 
+                                    (title, description, filePath, isMovie, uploadDate, releaseDate, views, duration, season, episode, entityId) 
+                                    VALUES (:title, :description, :filePath, :isMovie, :uploadDate, :releaseDate, :views, :duration, :season, :episode,  :entityId)");
+
+        $query->bindValue(':title', $videoData['title']);
+        $query->bindValue(':description', $videoData['description']);
+        $query->bindValue(':filePath', $videoData['filePath']);
+        $query->bindValue(':isMovie', $videoData['isMovie']);
+        $query->bindValue(':uploadDate', $videoData['uploadDate']);
+        $query->bindValue(':releaseDate', $videoData['releaseDate']);
+        $query->bindValue(':views', $videoData['views']);
+        $query->bindValue(':duration', $videoData['duration']);
+        $query->bindValue(':season', $videoData['season']);
+        $query->bindValue(':episode', $videoData['episode']);
+        $query->bindValue(':entityId', $videoData['entityId']);
+        $query->execute();
+
+        return $this->db->lastInsertId();
+    }
+
+
+    public function removeVideo($videoId)
+    {
+
+        $query = "DELETE FROM videos 
+                WHERE id = ?";
+
+        $statement = $this->db->prepare($query);
+
+        $statement->execute([$videoId]);
+    }
+
+    public function getPage($page, $perPage)
+    {
+        $offset = ($page - 1) * $perPage;
+
+        $query = $this->db->prepare("SELECT * 
+                                    FROM videos 
+                                    ORDER BY releaseDate 
+                                    DESC LIMIT ?, ?");
+
+        $query->bindParam(1, $offset, PDO::PARAM_INT);
+        $query->bindParam(2, $perPage, PDO::PARAM_INT);
+        $query->execute();
+
+        return $query->fetchAll();
     }
 
 
