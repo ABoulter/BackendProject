@@ -28,7 +28,7 @@
             </h1>
             <form class="editForm" method="POST" action="/adminEditEntity/<?= $id; ?>" enctype="multipart/form-data">
                 <label for="title">Name:</label>
-                <input type="text" id="title" name="title" value="<?= $entity['name']; ?>">
+                <input type="text" id="name" name="entityName" value="<?= $entity['name']; ?>">
 
                 <label for="description">Thumbnail:</label>
                 <input type="file" id="thumbnail" name="thumbnail">
@@ -44,9 +44,12 @@
                     <?php } ?>
                 </select>
 
-                <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
-                <button type="submit" class="updateEntityBtn" name="updateEntity">Update</button>
-                <button type="submit" class="deleteEntityBtn" name="deleteEntity">Delete</button>
+                <div> <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
+                    <button type="submit" class="updateEntityBtn" name="updateEntity">Update</button>
+                    <button type="submit" class="deleteEntityBtn" name="deleteEntity">Delete</button>
+                </div>
+
+
 
                 <?php
                 if (isset($successMessage)) {

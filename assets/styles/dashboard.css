@@ -531,6 +531,7 @@ td a:hover {
 .deleteEntityBtn {
   padding: 10px 20px;
   background-color: #e91b0c;
+  margin-top: 10px;
   color: white;
   border: none;
   border-radius: 5px;

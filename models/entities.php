@@ -179,7 +179,7 @@ class Entities extends Base
 
 
 
-        $query->execute([$name, $thumbnail, $preview, $categoryId]);
+        $query->execute([$name, $thumbnail, $preview, $categoryId, $entityId]);
     }
 
     public function removeEntity($entityId)

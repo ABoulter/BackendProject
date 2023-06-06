@@ -26,11 +26,13 @@ if (isset($_POST["updateEntity"]) && $_SESSION["csrf_token"] === $_POST["csrf_to
     $categoryId = $_POST["categorySelect"];
 
 
+
     $entityData = [
         'name' => $entityName,
         'thumbnail' => $thumbnailDestination . $thumbnail,
         'preview' => $previewDestination . $preview,
-        'categoryId' => $categoryId
+        'categoryId' => $categoryId,
+
     ];
 
     $entitiesModel->updateEntity($id, $entityData);
