@@ -1,7 +1,7 @@
 <?php
 
 
-if (!isset($_SESSION["user_id"]) && !$_SESSION["admin"] == 1) {
+if (!isset($_SESSION["user_id"])) {
     header("Location: login");
     exit();
 }
@@ -9,3 +9,8 @@ if (!isset($_SESSION["user_id"]) && !$_SESSION["admin"] == 1) {
 $userId = $_SESSION["user_id"];
 $username = $_SESSION["username"];
 $admin = $_SESSION["admin"];
+
+if (!$admin) {
+    header("Location: login");
+    exit();
+}
