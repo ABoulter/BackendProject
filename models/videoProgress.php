@@ -80,6 +80,25 @@ class VideoProgress extends Base
         return $result;
     }
 
+    public function getStartTime($userId, $videoId)
+    {
+
+        $query = $this->db->prepare("SELECT videoProgress.progress FROM videoProgress
+                                    LEFT JOIN users ON videoProgress.userId = users.id
+                                    WHERE users.id = ? 
+                                    AND videoProgress.videoId = ?");
+
+        $query->execute([$userId, $videoId]);
+        $startTime = $query->fetchColumn();
+
+        if ($startTime !== false) {
+            return $startTime;
+        } else {
+            http_response_code(400);
+            return json_encode(array("message" => "No videoId or userId passed into file"));
+        }
+    }
+
 
 
 

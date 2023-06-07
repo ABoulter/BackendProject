@@ -68,7 +68,7 @@
             </div>
 
             <video controls autoplay onended="showUpNext();">
-                <source src='/<?= $video['filePath'] ?>' type="video/mp4">
+                <source src='/<?= $video['filePath'] ?><?= $startTime ? "#t=" . $startTime : "" ?>' type="video/mp4">
             </video>
         </div>
 
