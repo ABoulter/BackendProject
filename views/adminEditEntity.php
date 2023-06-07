@@ -31,16 +31,26 @@
                 <input type="text" id="name" name="entityName" value="<?= $entity['name']; ?>">
 
                 <label for="description">Thumbnail:</label>
-                <input type="file" id="thumbnail" name="thumbnail">
+                <input type="file" id="thumbnail" name="thumbnail" value="<?= $entity['thumbnail']; ?>"
+                    accept=".jpg, .jpeg, .png">
+                <?php if ($entity['thumbnail']): ?>
+                    <input type="hidden" name="currentThumbnail" value="<?php echo $entity['thumbnail']; ?>">
+                <?php endif; ?>
+
 
                 <label for="filepath">Preview:</label>
-                <input type="file" id="preview" name="preview">
+                <input type="file" id="preview" name="preview" accept=".mp4, .ogg, .webm">
+                <?php if ($entity['preview']): ?>
+                    <input type="hidden" name="currentPreview" value="<?php echo $entity['preview']; ?>">
+                <?php endif; ?>
 
                 <label for="entityCategory">Category:</label>
                 <select id="entityCategory" name="categorySelect">
                     <option value="">-- Select Category --</option>
                     <?php foreach ($categories as $category) { ?>
-                        <option value="<?= $category['id']; ?>"><?= $category['name']; ?></option>
+                        <option value="<?= $category['id']; ?>" <?= ($category['id'] == $entity['categoryId']) ? 'selected' : ''; ?>>
+                            <?= $category['name']; ?>
+                        </option>
                     <?php } ?>
                 </select>
 
@@ -54,6 +64,8 @@
                 <?php
                 if (isset($successMessage)) {
                     echo '<span class="alertSuccess">' . $successMessage . '</span>';
+                } else if (isset($errorMessage)) {
+                    echo '<span class="alertError">' . $errorMessage . '</span>';
                 }
                 ?>
                 <a href="/adminEntity">Return to entity list</a>
@@ -65,5 +77,6 @@
 
 
 </body>
+
 
 </html>
