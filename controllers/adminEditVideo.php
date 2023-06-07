@@ -10,21 +10,45 @@ if (isset($_POST["updateVideo"]) && $_SESSION["csrf_token"] === $_POST["csrf_tok
     }
 
     $filePathDestination = 'entities/videos/';
+    $allowedFilePathTypes = ['video/mp4', 'video/ogg', 'video/webm'];
+
     $filePathTmpPath = $_FILES["filePath"]["tmp_name"];
+    $filePathType = $_FILES["filePath"]["type"];
     $filePath = $_FILES["filePath"]["name"];
-    move_uploaded_file($filePathTmpPath, $filePathDestination . $filePath);
+
+
+
+    if (empty($filePathTmpPath)) {
+        $filePath = $_POST["currentFilePath"];
+
+    } else {
+        $filePath = $filePathDestination . $filePath;
+        move_uploaded_file($filePathTmpPath, $filePath);
+    }
 
     $videoData = [
         'title' => $_POST["title"],
         'description' => $_POST["description"],
-        'filepath' => $filePathDestination . $filePath,
+        'filepath' => $filePath,
         'season' => $_POST["season"],
         'episode' => $_POST["episode"],
         'releaseDate' => $_POST["releaseDate"]
     ];
 
-    $videosModel->updateVideo($id, $videoData);
-    $successMessage = "Video successfully updated";
+    if ($_FILES["filePath"]["name"] == '') {
+        $videosModel->updateVideo($id, $videoData);
+        $successMessage = "Video successfully updated";
+    }
+
+    if (!in_array($filePathType, $allowedFilePathTypes)) {
+        $errorMessage = "Invalid video file type. Only MP4, OGG, and WebM files are allowed.";
+    } else {
+        $videosModel->updateVideo($id, $videoData);
+        $successMessage = "Video successfully updated";
+    }
+
+
+
 
 } else if (isset($_POST["deleteVideo"]) && $_SESSION["csrf_token"] === $_POST["csrf_token"]) {
 

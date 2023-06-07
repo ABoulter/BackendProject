@@ -34,7 +34,10 @@
                 <textarea id="description" name="description"><?= $video['description']; ?></textarea>
 
                 <label for="filepath">Video:</label>
-                <input type="file" id="filepath" name="filePath">
+                <input type="file" id="filepath" name="filePath" accept=".mp4, .ogg, .webm">
+                <?php if ($video['filePath']): ?>
+                    <input type="hidden" name="currentFilePath" value="<?php echo $video['filePath']; ?>">
+                <?php endif; ?>
 
                 <label for="season">Season:</label>
                 <input type="number" id="season" name="season" value="<?= $video['season']; ?>">
@@ -51,6 +54,8 @@
                 <?php
                 if (isset($successMessage)) {
                     echo '<span class="alertSuccess">' . $successMessage . '</span>';
+                } else if (isset($errorMessage)) {
+                    echo '<span class="alertError">' . $errorMessage . '</span>';
                 }
                 ?>
                 <a href="/adminEdit">Return to video list</a>
