@@ -16,6 +16,15 @@
     <div class="main">
         <h1 class="formHeader">Create Video</h1>
         <form class="createForm" method="POST" action="/adminAdd" enctype="multipart/form-data">
+
+            <label for="entitySelect">Select Entity:</label>
+            <select id="entitySelect" name="entitySelect">
+                <option value="">-- Select Entity --</option>
+                <?php foreach ($entities as $entity) { ?>
+                    <option value="<?= $entity['id']; ?>"><?= $entity['name']; ?></option>
+                <?php } ?>
+            </select>
+            <button type="button" class="entityBtn" onclick="toggleNewEntityForm()">Create New Entity</button>
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" required>
 
@@ -23,7 +32,8 @@
             <textarea id="description" name="description" required></textarea>
 
             <label for="filepath">Video:</label>
-            <input type="file" id="filepath" name="filePath" required>
+            <input type="file" id="filepath" name="filePath" accept=".mp4, .ogg, .webm" required>
+
 
             <label for="season">Season:</label>
             <input type="number" id="season" name="season" value=0>
@@ -34,15 +44,7 @@
             <label for="releaseDate">Release Date:</label>
             <input type="date" id="releaseDate" name="releaseDate" required>
 
-            <label for="entitySelect">Select Entity:</label>
-            <select id="entitySelect" name="entitySelect">
-                <option value="">-- Select Entity --</option>
-                <?php foreach ($entities as $entity) { ?>
-                    <option value="<?= $entity['id']; ?>"><?= $entity['name']; ?></option>
-                <?php } ?>
-            </select>
 
-            <button type="button" class="entityBtn" onclick="toggleNewEntityForm()">Create New Entity</button>
             <label for="isMovie">Is it a Movie?</label>
             <select id="isMovie" name="isMovie">
                 <option value="0">No</option>
@@ -65,10 +67,10 @@
             <input type="text" id="entityName" name="entityName">
 
             <label for="entityThumbnail">Thumbnail:</label>
-            <input type="file" id="thumbnail" name="thumbnail">
+            <input type="file" id="thumbnail" name="thumbnail" accept=".jpg, .jpeg, .png">
 
             <label for="entityPreview">Preview:</label>
-            <input type="file" id="preview" name="preview">
+            <input type="file" id="preview" name="preview" accept=".mp4, .ogg, .webm">
 
             <label for="entityCategory">Category:</label>
             <select id="entityCategory" name="categorySelect">
