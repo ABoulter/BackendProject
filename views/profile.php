@@ -72,9 +72,10 @@
                     <?php
 
                     if ((bool) $user["isSubscribed"]) {
-
+                        $_SESSION["subscribed"] = 1;
                         echo "<h3> You are subscribed! Go to Paypal if you wish to cancel </h3>";
                     } else {
+                        $_SESSION["subscribed"] = 0;
                         echo '<a href="/billing"> Subscribe to Ductape </a>';
                     }
 

@@ -25,7 +25,8 @@ $allowed_controllers = [
     "adminEditVideo",
     "adminAdd",
     "adminEntity",
-    "adminEditEntity"
+    "adminEditEntity",
+    "subscribe"
 ];
 
 if (!empty($url_parts[1])) {

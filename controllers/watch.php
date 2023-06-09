@@ -6,7 +6,10 @@ require_once("models/videoProgress.php");
 require_once("helpers/httpError.php");
 require_once("auth.php");
 
-
+if ((bool) !$subscribed) {
+    header("Location: /subscribe");
+    exit();
+}
 
 
 if (empty($id) || !is_numeric($id)) {

@@ -29,7 +29,7 @@ class Users extends Base
 
     public function login($username)
     {
-        $query = $this->db->prepare("SELECT id, username, email, password, isAdmin
+        $query = $this->db->prepare("SELECT id, username, email, password, isAdmin, isSubscribed
                                     FROM users
                                     WHERE username = ?
         ");

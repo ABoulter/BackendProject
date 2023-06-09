@@ -20,7 +20,11 @@
             <i class="fa-solid fa-magnifying-glass"></i>
         </a>
         <a href="/profile">
-            <i class="fa-solid fa-user"></i>
+            <?php if (!$subscribed) { ?>
+                <i class="fa-solid fa-user"></i>
+            <?php } else { ?>
+                <i class="fa-solid fa-user subscribed"></i>
+            <?php } ?>
             <?= $username ?>
         </a>
 

@@ -1,6 +1,11 @@
 <?php
-require_once("adminAuth.php");
+require_once("auth.php");
 require_once("models/videos.php");
+
+if (!$admin) {
+    header("Location: login");
+    exit();
+}
 
 $videosModel = new Videos();
 
